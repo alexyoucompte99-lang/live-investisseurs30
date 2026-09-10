@@ -91,7 +91,10 @@
     border: 1px solid rgba(82, 131, 111, 0.25); border-radius: 100px;
     padding: 8px 16px 8px 12px; margin-bottom: 26px;
   }
+  .eyebrow .live-dot { flex: none; }
+  .eyebrow-txt { line-height: 1.5; }
   .eyebrow .compte {
+    flex: none;
     font-weight: 700; color: var(--navy); background: var(--mint-wash);
     border-radius: 100px; padding: 2px 9px; letter-spacing: 0.04em;
   }
@@ -111,8 +114,9 @@
   .hero-sub { font-size: clamp(1rem, 1.6vw, 1.12rem); color: var(--navy-soft); max-width: 560px; text-wrap: pretty; }
   .hero-sub strong { color: var(--navy); }
   .hero-hosts { display: flex; align-items: center; gap: 14px; margin-top: 28px; }
-  .avatars { display: flex; }
+  .avatars { display: flex; flex: none; }
   .avatars img {
+    flex: none; max-width: none;
     width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
     border: 3px solid var(--white); box-shadow: 0 6px 16px -6px rgba(15, 25, 39, 0.4);
     margin-left: -12px; background: var(--surface);
@@ -399,7 +403,7 @@
   }
   @media (max-width: 480px) {
     body { font-size: 16px; }
-    .eyebrow { font-size: 0.64rem; letter-spacing: 0.1em; padding: 6px 12px 6px 10px; margin-bottom: 18px; }
+    .eyebrow { font-size: 0.64rem; letter-spacing: 0.1em; padding: 6px 12px 6px 10px; margin-bottom: 18px; max-width: 100%; border-radius: 18px; }
     .carte-tete { flex-direction: column; align-items: flex-start; gap: 8px; }
     .barre .info small { display: none; }
   }
@@ -422,7 +426,7 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <p class="eyebrow fx in"><span class="live-dot"></span> Live gratuit · <span data-config="date">jeudi 24 septembre</span> à <span data-config="heure">20h</span> <span class="compte" id="compte" hidden></span></p>
+        <p class="eyebrow fx in"><span class="live-dot"></span><span class="eyebrow-txt">Live gratuit · <span data-config="date">jeudi 24 septembre</span> à <span data-config="heure">20h</span></span><span class="compte" id="compte" hidden></span></p>
         <h1 class="fx in fx-d1">Comment investir <span class="hl">100&nbsp;000&nbsp;€<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M3 6 L197 6"/></svg></span> pour créer un patrimoine qui travaille pour vous.</h1>
         <p class="hero-sub fx in fx-d2">La méthode complète des gestionnaires de fortune : <strong>placements, fiscalité, structuration</strong>. Deux heures en direct, sur des cas réels, avec Thomas Mayol et les experts de Valar Gestion Privée.</p>
         <div class="hero-hosts fx in fx-d3">
