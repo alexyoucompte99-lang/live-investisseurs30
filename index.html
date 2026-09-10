@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Comment investir 100 000 € | Live gratuit Investisseurs 3.0</title>
+<meta name="description" content="Live gratuit avec Thomas Mayol et les experts de Valar Gestion Privée : la méthode complète des gestionnaires de fortune pour investir 100 000 €. Placements, fiscalité, structuration, sur des cas réels.">
+<link rel="icon" type="image/svg+xml" href="assets/logo-i3.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --white: #ffffff;
+    --surface: #f6f8f8;
+    --navy: #0f1927;
+    --navy-soft: #5a6674;
+    --mint: #80b9a5;
+    --mint-deep: #52836f;
+    --mint-wash: rgba(128, 185, 165, 0.16);
+    --line: rgba(15, 25, 39, 0.09);
+    --live: #de7362;
+    --wa: #25d366;
+    --display: "Montserrat", -apple-system, "Segoe UI", sans-serif;
+    --body: "Montserrat", -apple-system, "Segoe UI", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; overflow-x: clip; }
+  img, video, iframe, svg { max-width: 100%; }
+  body {
+    background: var(--white);
+    color: var(--navy);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  strong { font-weight: 700; }
+  .wrap { width: 100%; max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  .wrap-narrow { width: 100%; max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Jauge de lecture ---------- */
+  .jauge {
+    position: fixed; top: 0; left: 0; z-index: 60;
+    width: 100%; height: 3px;
+    background: var(--mint);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+  }
+
+  /* ---------- Apparitions au scroll ---------- */
+  .fx { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fx.in { opacity: 1; transform: none; }
+  .fx-d1 { transition-delay: 0.1s; }
+  .fx-d2 { transition-delay: 0.2s; }
+  .fx-d3 { transition-delay: 0.3s; }
+
+  /* ---------- Header ---------- */
+  header { padding: 24px 0; position: relative; z-index: 2; }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .logo img { height: 40px; width: auto; display: block; }
+  .header-badge {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--navy-soft); white-space: nowrap;
+  }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--live); animation: pulse-live 1.8s ease infinite; }
+  @keyframes pulse-live {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(222, 115, 98, 0.45); }
+    50% { box-shadow: 0 0 0 7px rgba(222, 115, 98, 0); }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; padding: 30px 0 56px; overflow: hidden; }
+  .hero-glow {
+    position: absolute; top: -220px; left: 50%; transform: translateX(-50%);
+    width: 1000px; max-width: 100vw; height: 600px;
+    background: radial-gradient(ellipse at center, var(--mint-wash), transparent 65%);
+    pointer-events: none;
+  }
+  .hero > .wrap { position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 56px; align-items: center; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.74rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--mint-deep); background: var(--white);
+    border: 1px solid rgba(82, 131, 111, 0.25); border-radius: 100px;
+    padding: 8px 16px 8px 12px; margin-bottom: 26px;
+  }
+  .eyebrow .compte {
+    font-weight: 700; color: var(--navy); background: var(--mint-wash);
+    border-radius: 100px; padding: 2px 9px; letter-spacing: 0.04em;
+  }
+  .eyebrow .compte.direct { background: var(--live); color: #fff; }
+  .hero h1 {
+    font-family: var(--display); font-weight: 900;
+    font-size: clamp(2rem, 3.7vw, 2.85rem); line-height: 1.14; letter-spacing: -0.022em;
+    text-wrap: balance; margin: 0 0 20px;
+  }
+  .hl { position: relative; white-space: nowrap; }
+  .hl svg { position: absolute; left: 0; bottom: -4px; width: 100%; height: 12px; overflow: visible; }
+  .hl svg path {
+    fill: none; stroke: var(--mint); stroke-width: 5; stroke-linecap: round;
+    stroke-dasharray: 320; stroke-dashoffset: 320; animation: draw 1s ease 0.7s forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .hero-sub { font-size: clamp(1rem, 1.6vw, 1.12rem); color: var(--navy-soft); max-width: 560px; text-wrap: pretty; }
+  .hero-sub strong { color: var(--navy); }
+  .hero-hosts { display: flex; align-items: center; gap: 14px; margin-top: 28px; }
+  .avatars { display: flex; }
+  .avatars img {
+    width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
+    border: 3px solid var(--white); box-shadow: 0 6px 16px -6px rgba(15, 25, 39, 0.4);
+    margin-left: -12px; background: var(--surface);
+  }
+  .avatars img:first-child { margin-left: 0; }
+  .hero-hosts p { font-size: 0.86rem; color: var(--navy-soft); line-height: 1.45; }
+  .hero-hosts p strong { color: var(--navy); font-weight: 600; }
+  .hero-cta { display: none; margin-top: 26px; }
+
+  /* ---------- Carte d'inscription ---------- */
+  .carte {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 30px 30px 26px;
+    box-shadow: 0 34px 70px -34px rgba(15, 25, 39, 0.35), 0 0 0 6px rgba(128, 185, 165, 0.10);
+    scroll-margin-top: 20px;
+  }
+  .carte-tete {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding-bottom: 18px; margin-bottom: 20px; border-bottom: 1px solid var(--line);
+  }
+  .carte-quand { font-family: var(--display); font-weight: 900; font-size: 1.02rem; letter-spacing: -0.01em; line-height: 1.3; }
+  .carte-quand small { display: block; font-family: var(--body); font-weight: 500; font-size: 0.78rem; color: var(--navy-soft); letter-spacing: 0; margin-top: 2px; }
+  .pill-gratuit {
+    flex-shrink: 0; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--mint-deep); background: var(--mint-wash); border-radius: 100px; padding: 6px 12px;
+  }
+  .etape { display: none; }
+  .etape.visible { display: block; animation: etape-in 0.45s ease both; }
+  @keyframes etape-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .carte h2 { font-family: var(--display); font-weight: 900; font-size: 1.35rem; letter-spacing: -0.015em; line-height: 1.25; margin-bottom: 6px; }
+  .carte .intro { font-size: 0.9rem; color: var(--navy-soft); margin-bottom: 18px; }
+  .champ { margin-bottom: 14px; }
+  .champ-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .etiquette { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--navy); margin-bottom: 6px; }
+  .etiquette small { font-weight: 500; color: var(--navy-soft); }
+  .boite input, .boite select {
+    width: 100%; font-family: var(--body); font-size: 1rem; color: var(--navy);
+    background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px;
+    padding: 13px 14px; outline: none; -webkit-appearance: none; appearance: none;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+  .boite select { padding-right: 40px; cursor: pointer; }
+  .boite { position: relative; }
+  .boite.select::after {
+    content: ""; position: absolute; right: 16px; top: 50%; width: 9px; height: 9px;
+    border-right: 2px solid var(--navy-soft); border-bottom: 2px solid var(--navy-soft);
+    transform: translateY(-70%) rotate(45deg); pointer-events: none;
+  }
+  .boite input::placeholder { color: rgba(90, 102, 116, 0.6); }
+  .boite input:focus, .boite select:focus { border-color: var(--mint); background: var(--white); box-shadow: 0 0 0 4px var(--mint-wash); }
+  .aide { font-size: 0.76rem; color: var(--navy-soft); margin-top: 6px; line-height: 1.5; }
+  .erreur { display: none; font-size: 0.76rem; color: #c9503d; margin-top: 6px; font-weight: 600; }
+  .champ.invalide .erreur { display: block; }
+  .champ.invalide .boite input, .champ.invalide .boite select { border-color: #de7362; animation: tremble 0.35s ease; }
+  @keyframes tremble { 0%, 100% { transform: none; } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+
+  .cta-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: var(--display); font-weight: 700; font-size: 1rem;
+    color: var(--white) !important; background: var(--navy);
+    border: 0; border-radius: 12px; padding: 17px 32px; cursor: pointer;
+    text-decoration: none; -webkit-tap-highlight-color: transparent;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    box-shadow: 0 14px 34px -14px rgba(15, 25, 39, 0.5);
+  }
+  .cta-btn .arrow { display: inline-flex; transition: transform 0.18s ease; }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 44px -14px rgba(15, 25, 39, 0.55); }
+  .cta-btn:hover .arrow { transform: translateX(4px); }
+  .cta-btn:disabled { opacity: 0.7; cursor: wait; transform: none; }
+  .cta-btn.large { width: 100%; padding: 18px 24px; font-size: 1.04rem; margin-top: 6px; }
+  .cta-btn.mint { background: var(--mint); color: var(--navy) !important; box-shadow: 0 16px 40px -14px rgba(128, 185, 165, 0.5); }
+  .cta-note { margin-top: 12px; font-size: 0.78rem; color: var(--navy-soft); text-align: center; }
+  .mention-rgpd { font-size: 0.72rem; color: var(--navy-soft); line-height: 1.5; margin-top: 14px; }
+  .mention-rgpd a { color: var(--navy-soft); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Confirmation */
+  .sceau { display: flex; justify-content: center; margin: 4px 0 14px; }
+  .sceau svg { width: 62px; height: 62px; }
+  .sceau circle { fill: none; stroke: var(--mint); stroke-width: 2.5; stroke-dasharray: 100; stroke-dashoffset: 100; animation: draw100 0.9s ease 0.1s forwards; }
+  .sceau path { fill: none; stroke: var(--mint-deep); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: 100; animation: draw100 0.6s ease 0.8s forwards; }
+  @keyframes draw100 { to { stroke-dashoffset: 0; } }
+  .conf-titre { text-align: center; }
+  .conf-texte { font-size: 0.92rem; color: var(--navy-soft); text-align: center; margin-bottom: 16px; }
+  .conf-texte strong { color: var(--navy); }
+  .conf-visio { text-align: center; margin-bottom: 14px; font-size: 0.92rem; }
+  .agenda { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 4px 0 18px; }
+  .lien-agenda {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--display); font-weight: 700; font-size: 0.88rem; color: var(--navy);
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 11px 16px;
+    text-decoration: none; transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  .lien-agenda:hover { border-color: var(--mint); transform: translateY(-1px); }
+  .lien-agenda svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .agenda .secondaire { font-size: 0.76rem; color: var(--navy-soft); text-decoration: underline; text-underline-offset: 2px; }
+  .consignes { list-style: none; display: grid; gap: 10px; margin: 6px 0 18px; }
+  .consignes li { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 0.86rem; line-height: 1.5; }
+  .consignes li b { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--mint-wash); color: var(--mint-deep); font-family: var(--display); font-weight: 900; font-size: 0.78rem; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .consignes li strong { display: block; color: var(--navy); }
+  .consignes li span { color: var(--navy-soft); }
+  .btn-wa {
+    display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
+    font-family: var(--display); font-weight: 700; font-size: 0.98rem; color: #fff !important;
+    background: var(--wa); border-radius: 12px; padding: 15px 20px; text-decoration: none;
+    box-shadow: 0 14px 30px -14px rgba(37, 211, 102, 0.6); transition: transform 0.18s ease;
+  }
+  .btn-wa:hover { transform: translateY(-2px); }
+  .btn-wa svg { width: 20px; height: 20px; fill: #fff; }
+  .conf-rappel { margin-top: 16px; font-size: 0.8rem; color: var(--navy-soft); text-align: center; line-height: 1.5; }
+
+  /* ---------- Preuve ---------- */
+  .proof { padding: 0 0 8px; }
+  .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .proof-item { text-align: center; padding: 30px 18px; background: var(--white); border: 1px solid var(--line); border-radius: 16px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .proof-item:hover { transform: translateY(-4px); box-shadow: 0 20px 44px -22px rgba(15, 25, 39, 0.25); }
+  .proof-num { font-family: var(--display); font-weight: 900; font-size: clamp(1.7rem, 3.4vw, 2.4rem); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .proof-num em { font-style: normal; color: var(--mint-deep); }
+  .proof-label { margin-top: 8px; font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy-soft); }
+
+  /* ---------- Sections ---------- */
+  section.block { padding: 84px 0 0; }
+  .section-eyebrow { text-align: center; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mint-deep); margin-bottom: 14px; }
+  .section-title { font-family: var(--display); font-weight: 900; font-size: clamp(1.5rem, 3.2vw, 2.1rem); letter-spacing: -0.015em; line-height: 1.2; text-align: center; text-wrap: balance; max-width: 680px; margin: 0 auto 18px; }
+  .section-sub { text-align: center; color: var(--navy-soft); max-width: 620px; margin: 0 auto 44px; text-wrap: pretty; }
+
+  /* Pour vous si */
+  .pour-vous { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .pv {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 28px 26px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .pv:hover { transform: translateY(-4px); box-shadow: 0 20px 44px -22px rgba(15, 25, 39, 0.22); }
+  .pv .check { width: 38px; height: 38px; border-radius: 50%; background: var(--white); border: 1px solid rgba(82, 131, 111, 0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .pv .check svg { width: 18px; height: 18px; fill: none; stroke: var(--mint-deep); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  .pv p { font-size: 0.94rem; color: var(--navy-soft); }
+  .pv p strong { color: var(--navy); }
+
+  /* Programme */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; counter-reset: step; }
+  .step { position: relative; background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 30px 26px; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+  .step:hover { transform: translateY(-4px); border-color: rgba(82, 131, 111, 0.4); box-shadow: 0 20px 44px -22px rgba(15, 25, 39, 0.22); }
+  .step::after { counter-increment: step; content: "0" counter(step); position: absolute; right: 16px; top: 6px; font-family: var(--display); font-weight: 900; font-size: 3.2rem; line-height: 1; color: var(--mint-wash); }
+  .step-tag { display: inline-block; font-family: var(--display); font-weight: 700; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mint-deep); background: var(--mint-wash); border-radius: 100px; padding: 5px 12px; margin-bottom: 16px; }
+  .step h3 { font-family: var(--display); font-weight: 900; font-size: 1.08rem; letter-spacing: -0.01em; margin-bottom: 10px; text-wrap: balance; }
+  .step p { font-size: 0.92rem; color: var(--navy-soft); }
+  .repartez {
+    margin-top: 22px; background: var(--navy); color: var(--white); border-radius: 20px; padding: 34px 36px;
+    display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 32px; align-items: center; position: relative; overflow: hidden;
+  }
+  .repartez::before { content: ""; position: absolute; right: -160px; top: -160px; width: 420px; height: 420px; background: radial-gradient(circle, rgba(128, 185, 165, 0.25), transparent 65%); pointer-events: none; }
+  .repartez h3 { font-family: var(--display); font-weight: 900; font-size: 1.4rem; letter-spacing: -0.015em; line-height: 1.25; }
+  .repartez h3 em { font-style: normal; color: var(--mint); }
+  .repartez .meta { margin-top: 12px; font-size: 0.82rem; color: rgba(239, 239, 239, 0.65); }
+  .repartez ul { list-style: none; display: grid; gap: 10px; position: relative; }
+  .repartez li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.92rem; color: rgba(239, 239, 239, 0.9); line-height: 1.5; }
+  .repartez li::before { content: ""; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--mint); margin-top: 9px; }
+
+  /* Intervenants */
+  .hosts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .host { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 26px 24px; text-align: center; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .host:hover { transform: translateY(-4px); box-shadow: 0 20px 44px -22px rgba(15, 25, 39, 0.22); }
+  .host img { width: 118px; height: 118px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 16px; border: 4px solid var(--white); box-shadow: 0 14px 30px -14px rgba(15, 25, 39, 0.35); }
+  .host h3 { font-family: var(--display); font-weight: 900; font-size: 1.08rem; letter-spacing: -0.01em; }
+  .host .role { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mint-deep); font-weight: 600; margin: 4px 0 12px; line-height: 1.5; }
+  .host p { font-size: 0.88rem; color: var(--navy-soft); }
+  .agrements { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 26px; font-size: 0.78rem; color: var(--navy-soft); }
+  .agrements img { height: 34px; width: auto; opacity: 0.85; }
+
+  /* Partenaires (défilement) */
+  .marquee { margin-top: 44px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; padding: 18px 0; background: var(--surface); }
+  .marquee-label { text-align: center; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy-soft); margin-bottom: 14px; }
+  .marquee-track { display: flex; align-items: center; gap: 64px; width: max-content; animation: scroll-x 34s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes scroll-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-track img { height: 34px; width: auto; filter: grayscale(1); opacity: 0.55; transition: opacity 0.2s ease, filter 0.2s ease; }
+  .marquee-track img:hover { filter: none; opacity: 1; }
+
+  /* Témoignages */
+  .testi-videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .testi-video { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--navy); }
+  .testi-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+  .tv-facade { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; padding: 0; cursor: pointer; background: var(--navy); overflow: hidden; }
+  .tv-facade img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tv-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 54px; height: 54px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(15, 25, 39, 0.4); transition: transform 0.2s ease; }
+  .tv-play svg { margin-left: 3px; }
+  .tv-facade:hover .tv-play { transform: translate(-50%, -50%) scale(1.1); }
+  .testi-video figcaption { background: var(--surface); border-top: 1px solid var(--line); font-family: var(--display); font-weight: 900; font-size: 0.85rem; color: var(--navy); text-align: center; padding: 10px 14px; }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; }
+  .testi-card { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 34px 26px 26px; display: flex; flex-direction: column; gap: 18px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .testi-card:hover { transform: translateY(-5px); box-shadow: 0 24px 50px -24px rgba(15, 25, 39, 0.28); }
+  .testi-card::before { content: "“"; position: absolute; top: 8px; left: 22px; font-family: var(--display); font-weight: 900; font-size: 3.4rem; line-height: 1; color: var(--mint); }
+  .testi-card blockquote { font-size: 0.93rem; line-height: 1.65; flex: 1; padding-top: 16px; }
+  .testi-author { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--line); padding-top: 16px; }
+  .testi-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--white); border: 1px solid rgba(82, 131, 111, 0.3); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 900; font-size: 0.85rem; color: var(--mint-deep); }
+  .testi-name { font-weight: 600; font-size: 0.88rem; }
+  .testi-role { font-size: 0.76rem; color: var(--navy-soft); }
+  .testi-source { text-align: center; margin-top: 26px; font-size: 0.78rem; color: var(--navy-soft); }
+
+  /* Le mot de Thomas */
+  .about { display: grid; grid-template-columns: 210px 1fr; gap: 44px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 44px; }
+  .about-photo { width: 100%; max-width: 230px; height: auto; display: block; filter: drop-shadow(0 16px 30px rgba(15, 25, 39, 0.18)); }
+  .about h2 { font-family: var(--display); font-weight: 900; font-size: 1.5rem; letter-spacing: -0.015em; margin-bottom: 4px; }
+  .about-role { font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint-deep); font-weight: 600; margin-bottom: 18px; }
+  .about p { color: var(--navy-soft); font-size: 0.95rem; }
+  .about p + p { margin-top: 12px; }
+  .signature { margin-top: 22px; padding-left: 18px; border-left: 3px solid var(--mint); font-family: var(--display); font-weight: 900; font-size: 1.02rem; color: var(--navy); line-height: 1.45; }
+
+  /* FAQ */
+  .faq { max-width: 780px; margin: 0 auto; display: grid; gap: 10px; }
+  .faq details { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 0 22px; transition: border-color 0.2s ease; }
+  .faq details[open] { border-color: rgba(82, 131, 111, 0.4); }
+  .faq summary { list-style: none; cursor: pointer; padding: 18px 0; font-family: var(--display); font-weight: 700; font-size: 0.98rem; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--mint-wash); color: var(--mint-deep); font-weight: 700; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease; }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { padding: 0 0 18px; font-size: 0.92rem; color: var(--navy-soft); }
+
+  /* Bande finale */
+  .final-cta { position: relative; text-align: center; padding: 88px 0; margin-top: 88px; background: var(--navy); color: var(--white); overflow: hidden; }
+  .final-cta::before { content: ""; position: absolute; bottom: -220px; left: 50%; transform: translateX(-50%); width: 800px; height: 440px; background: radial-gradient(ellipse at center, rgba(128, 185, 165, 0.22), transparent 65%); }
+  .final-cta .wrap { position: relative; }
+  .final-cta h2 { font-family: var(--display); font-weight: 900; font-size: clamp(1.6rem, 3.4vw, 2.3rem); letter-spacing: -0.015em; line-height: 1.2; text-wrap: balance; max-width: 640px; margin: 0 auto 14px; }
+  .final-cta h2 em { font-style: normal; color: var(--mint); }
+  .final-cta p { color: rgba(239, 239, 239, 0.65); max-width: 520px; margin: 0 auto 30px; }
+  .final-cta .cta-note { color: rgba(239, 239, 239, 0.5); }
+  body.inscrit .final-cta { display: none; }
+
+  /* Footer */
+  footer { background: var(--navy); border-top: 1px solid rgba(239, 239, 239, 0.1); padding: 36px 0 110px; text-align: center; }
+  footer .logo-pied { height: 34px; width: auto; margin: 0 auto 18px; display: block; opacity: 0.9; }
+  .footer-links { display: flex; justify-content: center; gap: 26px; flex-wrap: wrap; margin-bottom: 14px; }
+  .footer-links a { color: rgba(239, 239, 239, 0.55); text-decoration: none; font-size: 0.8rem; }
+  .footer-links a:hover { color: var(--mint); }
+  .footer-legal { font-size: 0.73rem; color: rgba(239, 239, 239, 0.38); max-width: 680px; margin: 0 auto; line-height: 1.6; }
+  .footer-legal + .footer-legal { margin-top: 10px; }
+
+  /* Barre CTA collante */
+  .barre {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line); padding: 10px 18px calc(10px + env(safe-area-inset-bottom, 0px));
+    transform: translateY(110%); transition: transform 0.35s ease;
+  }
+  .barre.montre { transform: none; }
+  body.inscrit .barre { display: none; }
+  .barre .info { display: flex; flex-direction: column; line-height: 1.25; }
+  .barre .info span { font-family: var(--display); font-weight: 900; font-size: 0.9rem; }
+  .barre .info small { font-size: 0.72rem; color: var(--navy-soft); }
+  .barre .cta-btn { padding: 12px 20px; font-size: 0.9rem; border-radius: 10px; white-space: nowrap; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--mint-deep); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .fx { opacity: 1; transform: none; }
+    .hl svg path, .sceau circle, .sceau path { stroke-dashoffset: 0; }
+    .jauge { display: none; }
+  }
+
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+    .hero { padding: 16px 0 44px; }
+    .hero h1 { font-size: clamp(1.75rem, 6.4vw, 2.4rem); }
+    .hero-cta { display: block; }
+    .hero-hosts { margin-top: 20px; }
+    .repartez { grid-template-columns: 1fr; padding: 28px 24px; gap: 18px; }
+    .pour-vous, .steps, .hosts, .testi-videos, .testi-grid, .proof-grid { grid-template-columns: 1fr; }
+    .proof-grid { gap: 10px; }
+    .proof-item { padding: 20px 14px; }
+    .about { grid-template-columns: 1fr; text-align: center; padding: 30px 24px; }
+    .about-photo { margin: 0 auto; }
+    .signature { text-align: left; }
+    .header-badge { display: none; }
+    header { padding: 16px 0; }
+    section.block { padding: 64px 0 0; }
+    .carte { padding: 22px 18px 20px; border-radius: 18px; }
+    .champ-2 { grid-template-columns: 1fr; gap: 0; }
+    .final-cta { padding: 64px 0; margin-top: 64px; }
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    .eyebrow { font-size: 0.64rem; letter-spacing: 0.1em; padding: 6px 12px 6px 10px; margin-bottom: 18px; }
+    .carte-tete { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .barre .info small { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="jauge" id="jauge" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="#" aria-label="Investisseurs 3.0"><img src="assets/logo-i3.svg" alt="Investisseurs 3.0"></a>
+    <div class="header-badge"><span class="live-dot"></span> Live gratuit · <span data-config="date">jeudi 24 septembre</span> · <span data-config="heure">20h</span></div>
+  </div>
+</header>
+
+<!-- ============================ HERO + INSCRIPTION ============================ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow fx in"><span class="live-dot"></span> Live gratuit · <span data-config="date">jeudi 24 septembre</span> à <span data-config="heure">20h</span> <span class="compte" id="compte" hidden></span></p>
+        <h1 class="fx in fx-d1">Comment investir <span class="hl">100&nbsp;000&nbsp;€<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M3 6 L197 6"/></svg></span> pour créer un patrimoine qui travaille pour vous.</h1>
+        <p class="hero-sub fx in fx-d2">La méthode complète des gestionnaires de fortune : <strong>placements, fiscalité, structuration</strong>. Deux heures en direct, sur des cas réels, avec Thomas Mayol et les experts de Valar Gestion Privée.</p>
+        <div class="hero-hosts fx in fx-d3">
+          <div class="avatars">
+            <img src="assets/thomas-portrait.jpg" alt="Thomas Mayol">
+            <img src="assets/benjamin.jpg" alt="Benjamin Forget">
+            <img src="assets/ghislain.jpg" alt="Ghislain Cayla">
+          </div>
+          <p>Animé par <strong>Thomas Mayol</strong>, avec <strong>Benjamin Forget</strong> et <strong>Ghislain Cayla</strong>, gérants associés de Valar Gestion Privée.</p>
+        </div>
+        <div class="hero-cta fx in fx-d3">
+          <a class="cta-btn goto-form" href="#inscription" data-cta="Hero">Je réserve ma place <span class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
+        </div>
+      </div>
+
+      <div class="carte fx in fx-d2" id="inscription">
+        <div class="carte-tete">
+          <div class="carte-quand"><span data-config="date-cap">Jeudi 24 septembre</span> · <span data-config="heure">20h</span><small>2 heures en direct · en ligne · vos questions en fin de live</small></div>
+          <span class="pill-gratuit">Gratuit</span>
+        </div>
+
+        <!-- ÉTAPE 1 : inscription -->
+        <div class="etape visible" id="etape-optin">
+          <h2>Réservez votre place</h2>
+          <p class="intro">Le lien du live vous est envoyé par e-mail, avec un rappel le jour J.</p>
+
+          <div class="champ-2">
+            <div class="champ" id="champ-prenom">
+              <label class="etiquette" for="prenom">Prénom</label>
+              <div class="boite"><input type="text" id="prenom" name="prenom" autocomplete="given-name" placeholder="Votre prénom"></div>
+              <p class="erreur">Votre prénom, s'il vous plaît.</p>
+            </div>
+            <div class="champ" id="champ-nom">
+              <label class="etiquette" for="nom">Nom</label>
+              <div class="boite"><input type="text" id="nom" name="nom" autocomplete="family-name" placeholder="Votre nom"></div>
+              <p class="erreur">Votre nom, s'il vous plaît.</p>
+            </div>
+          </div>
+
+          <div class="champ" id="champ-email">
+            <label class="etiquette" for="email">E-mail</label>
+            <div class="boite"><input type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="prenom@exemple.com"></div>
+            <p class="erreur">Cet e-mail ne semble pas valide.</p>
+          </div>
+
+          <div class="champ" id="champ-situation">
+            <label class="etiquette" for="situation">Votre situation <small>· pour adapter les cas du live</small></label>
+            <div class="boite select">
+              <select id="situation" name="situation">
+                <option value="" selected disabled>Choisissez</option>
+                <option>Cadre</option>
+                <option>Chef d'entreprise / indépendant</option>
+                <option>Profession libérale</option>
+                <option>Salarié</option>
+                <option>Retraité</option>
+                <option>Étudiant</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <p class="erreur">Choisissez la situation qui vous correspond.</p>
+          </div>
+
+          <div class="champ" id="champ-tel">
+            <label class="etiquette" for="tel">Téléphone <small>· facultatif</small></label>
+            <div class="boite"><input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78"></div>
+            <p class="aide">Pour recevoir le rappel et le lien sur WhatsApp juste avant le début.</p>
+            <p class="erreur">Ce numéro ne semble pas valide.</p>
+          </div>
+
+          <button class="cta-btn large" id="btn-optin" type="button">Je réserve ma place <span class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></button>
+          <p class="cta-note">Gratuit · Sans engagement · Vos données restent chez Investisseurs 3.0</p>
+          <p class="mention-rgpd">En validant, vous acceptez qu'Investisseurs 3.0 utilise ces informations pour vous envoyer le lien du live, les rappels et ses contenus sur l'investissement. Désinscription possible à tout moment. <a href="https://investisseurs30.com/politique-de-confidentialite/" target="_blank" rel="noopener">Politique de confidentialité</a>.</p>
+        </div>
+
+        <!-- ÉTAPE 2 : confirmation -->
+        <div class="etape" id="etape-fin">
+          <div class="sceau" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <circle pathLength="100" cx="32" cy="32" r="28"/>
+              <path pathLength="100" d="M21 33 L29 41 L44 25"/>
+            </svg>
+          </div>
+          <h2 class="conf-titre">Votre place est réservée<span id="conf-prenom"></span>.</h2>
+          <p class="conf-texte">Rendez-vous <strong><span data-config="date">jeudi 24 septembre</span> à <span data-config="heure">20h</span></strong>, en ligne. Le lien du live vous est envoyé par e-mail<span id="conf-wa"></span>, avec un rappel le jour J.</p>
+
+          <p class="conf-visio" data-visio-bloc hidden>Votre lien pour nous rejoindre : <a class="lien-agenda" data-config="visio" href="#" target="_blank" rel="noopener">Rejoindre le live</a></p>
+
+          <div class="agenda" data-agenda>
+            <a class="lien-agenda" data-agenda-google target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>
+              Ajouter à mon Google Agenda
+            </a>
+            <a class="secondaire" data-agenda-ics download="live-investisseurs30.ics">Apple Calendrier, Outlook : télécharger l'invitation</a>
+          </div>
+
+          <ul class="consignes">
+            <li><b>1</b><div><strong>Bloquez les deux heures.</strong><span>Le live se vit en direct : c'est là que vous posez vos questions.</span></div></li>
+            <li><b>2</b><div><strong>Préparez vos chiffres.</strong><span>Montant disponible, placements actuels, tranche d'imposition. Vous en tirerez bien plus.</span></div></li>
+            <li><b>3</b><div><strong>Connectez-vous cinq minutes avant.</strong><span>Depuis le lien reçu, sur ordinateur de préférence pour lire les tableaux.</span></div></li>
+          </ul>
+
+          <a class="btn-wa" id="lien-communaute" href="#" target="_blank" rel="noopener" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.05 0C5.5 0 .2 5.3.2 11.85c0 2.1.55 4.15 1.6 5.95L0 24l6.35-1.65a11.9 11.9 0 0 0 5.7 1.45c6.55 0 11.85-5.3 11.85-11.85 0-3.15-1.25-6.15-3.4-8.45zm-8.45 18.25c-1.8 0-3.55-.5-5.05-1.4l-.35-.2-3.75 1 1-3.65-.25-.4a9.8 9.8 0 0 1-1.5-5.25c0-5.45 4.4-9.85 9.85-9.85 2.65 0 5.1 1.05 6.95 2.9a9.8 9.8 0 0 1 2.9 6.95c0 5.45-4.45 9.9-9.8 9.9zm5.4-7.35c-.3-.15-1.75-.85-2.05-.95-.25-.1-.45-.15-.65.15-.2.3-.75.95-.9 1.15-.15.2-.35.2-.65.05-.3-.15-1.25-.45-2.4-1.45-.9-.8-1.5-1.75-1.65-2.05-.15-.3 0-.45.15-.6.15-.15.3-.35.45-.5.15-.15.2-.3.3-.5.1-.2.05-.35 0-.5-.05-.15-.65-1.6-.9-2.2-.25-.55-.5-.5-.65-.5h-.55c-.2 0-.5.05-.8.35-.25.3-1.05 1-1.05 2.45s1.05 2.85 1.2 3.05c.15.2 2.1 3.2 5.1 4.5.7.3 1.25.5 1.7.65.7.2 1.35.2 1.85.1.55-.1 1.75-.7 2-1.4.25-.7.25-1.25.15-1.4-.05-.15-.25-.2-.55-.35z"/></svg>
+            Rejoindre la communauté WhatsApp du live
+          </a>
+
+          <p class="conf-rappel">Un imprévu ? Le replay est envoyé aux inscrits le lendemain. Mais les questions, elles, ne se posent qu'en direct.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PREUVE ============================ -->
+<div class="proof">
+  <div class="wrap proof-grid">
+    <div class="proof-item fx">
+      <div class="proof-num"><span class="count" data-target="600000" data-format="k">0</span></div>
+      <div class="proof-label">Abonnés</div>
+    </div>
+    <div class="proof-item fx fx-d1">
+      <div class="proof-num"><em>+</em><span class="count" data-target="700" data-format="space">0</span></div>
+      <div class="proof-label">Investisseurs accompagnés</div>
+    </div>
+    <div class="proof-item fx fx-d2">
+      <div class="proof-num"><span class="count" data-target="49" data-format="rating">0</span></div>
+      <div class="proof-label">Sur Trustpilot</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ POUR VOUS SI ============================ -->
+<section class="block" id="pour-vous">
+  <div class="wrap">
+    <p class="section-eyebrow fx">Ce live est pour vous si</p>
+    <h2 class="section-title fx">Vous avez du capital. Il vous manque la structure.</h2>
+    <p class="section-sub fx">Ce live s'adresse à celles et ceux qui ont déjà constitué un capital et veulent qu'il travaille enfin sérieusement.</p>
+    <div class="pour-vous">
+      <div class="pv fx">
+        <div class="check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <p><strong>Vous disposez de 100&nbsp;000&nbsp;€ ou plus à placer</strong> : épargne accumulée, héritage, cession, trésorerie d'entreprise. Et vous refusez de les laisser dormir sur un livret ou un fonds euros.</p>
+      </div>
+      <div class="pv fx fx-d1">
+        <div class="check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <p><strong>Vous gagnez bien votre vie</strong>, cadre, profession libérale ou dirigeant, et l'impôt prend chaque année une part que la bonne structure aurait évitée.</p>
+      </div>
+      <div class="pv fx fx-d2">
+        <div class="check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <p><strong>Vous voulez une stratégie d'ensemble</strong>, placements, fiscalité, structuration, transmission, plutôt qu'un empilement de produits vendus à la commission.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROGRAMME ============================ -->
+<section class="block" id="programme">
+  <div class="wrap">
+    <p class="section-eyebrow fx">Au programme</p>
+    <h2 class="section-title fx">Deux heures, trois temps forts, zéro théorie creuse</h2>
+    <p class="section-sub fx">Le fil rouge du live : 100&nbsp;000&nbsp;€ à investir. On les place, on les optimise, on les structure, devant vous.</p>
+    <div class="steps">
+      <div class="step fx">
+        <span class="step-tag">Cas réel</span>
+        <h3>Le cas concret, en vision 360°</h3>
+        <p>Un profil réel passé au crible par l'équipe : placements, fiscalité, structuration, transmission. Ce qu'on garde, ce qu'on change, dans quel ordre, et pourquoi.</p>
+      </div>
+      <div class="step fx fx-d1">
+        <span class="step-tag">Portefeuille</span>
+        <h3>Le portefeuille 100&nbsp;000&nbsp;€ du live</h3>
+        <p>Un portefeuille construit en direct et suivi mois après mois : allocation, supports, enveloppes fiscales, arbitrages. Vous voyez les décisions, pas seulement le résultat.</p>
+      </div>
+      <div class="step fx fx-d2">
+        <span class="step-tag">En direct</span>
+        <h3>Vos questions et l'actualité</h3>
+        <p>Un temps de questions sur votre propre situation, puis le décryptage de l'actualité qui compte vraiment pour vos placements.</p>
+      </div>
+    </div>
+    <div class="repartez fx">
+      <div>
+        <h3>Vous repartez avec <em>la méthode complète</em>, pas un teaser.</h3>
+        <p class="meta">Jeudi <span data-config="date-num">24 septembre</span> · <span data-config="heure">20h</span> à <span data-config="heure-fin">22h</span> · en ligne</p>
+      </div>
+      <ul>
+        <li>La méthode des gestionnaires de fortune pour répartir 100&nbsp;000&nbsp;€ selon votre profil et votre horizon.</li>
+        <li>Les leviers fiscaux et de structuration utilisés en gestion privée, expliqués simplement.</li>
+        <li>Un portefeuille réel, ses choix, et son suivi dans le temps.</li>
+        <li>Des réponses à vos questions, posées en direct.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ INTERVENANTS ============================ -->
+<section class="block" id="intervenants">
+  <div class="wrap">
+    <p class="section-eyebrow fx">Les intervenants</p>
+    <h2 class="section-title fx">Les experts qui accompagnent les clients de Valar Gestion Privée</h2>
+    <p class="section-sub fx">La gestion privée indépendante d'Investisseurs 3.0. Ce qu'ils font chaque jour pour leurs clients, ils le font devant vous pendant deux heures.</p>
+    <div class="hosts">
+      <div class="host fx">
+        <img src="assets/thomas-portrait.jpg" alt="Thomas Mayol" loading="lazy">
+        <h3>Thomas Mayol</h3>
+        <p class="role">Fondateur d'Investisseurs 3.0<br>Associé fondateur de Valar Gestion Privée</p>
+        <p>Suivi par plus de 600&nbsp;000 personnes. Avec son équipe, il accompagne plus de 700 investisseurs dans la structuration de leur patrimoine. Il tient le fil rouge du live.</p>
+      </div>
+      <div class="host fx fx-d1">
+        <img src="assets/benjamin.jpg" alt="Benjamin Forget" loading="lazy">
+        <h3>Benjamin Forget</h3>
+        <p class="role">Gérant associé, Valar Gestion Privée<br>CIF · CGP</p>
+        <p>Conseiller en investissements financiers et en gestion de patrimoine. Il porte le cas concret du live : placements, fiscalité, structuration.</p>
+      </div>
+      <div class="host fx fx-d2">
+        <img src="assets/ghislain.jpg" alt="Ghislain Cayla" loading="lazy">
+        <h3>Ghislain Cayla</h3>
+        <p class="role">Gérant associé, Valar Gestion Privée<br>CIF · CGP</p>
+        <p>Conseiller en investissements financiers et en gestion de patrimoine. Avec Benjamin, il décortique le cas du soir et répond à vos questions en direct.</p>
+      </div>
+    </div>
+    <div class="agrements fx">
+      <img src="assets/orias.png" alt="ORIAS" loading="lazy">
+      <img src="assets/cncef.png" alt="CNCEF" loading="lazy">
+      <span>Valar Gestion Privée · immatriculation ORIAS n°&nbsp;26005776</span>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <p class="marquee-label">Les solutions avec lesquelles l'équipe travaille</p>
+    <div class="marquee-track">
+      <img src="assets/p-edr.png" alt="" loading="lazy"><img src="assets/p-bil.png" alt="" loading="lazy"><img src="assets/p-efg.png" alt="" loading="lazy"><img src="assets/p-generali.png" alt="" loading="lazy"><img src="assets/p-corum.png" alt="" loading="lazy"><img src="assets/p-uaf.png" alt="" loading="lazy"><img src="assets/p-wealins.png" alt="" loading="lazy">
+      <img src="assets/p-edr.png" alt="" loading="lazy"><img src="assets/p-bil.png" alt="" loading="lazy"><img src="assets/p-efg.png" alt="" loading="lazy"><img src="assets/p-generali.png" alt="" loading="lazy"><img src="assets/p-corum.png" alt="" loading="lazy"><img src="assets/p-uaf.png" alt="" loading="lazy"><img src="assets/p-wealins.png" alt="" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TÉMOIGNAGES ============================ -->
+<section class="block" id="temoignages">
+  <div class="wrap">
+    <p class="section-eyebrow fx">Ils témoignent</p>
+    <h2 class="section-title fx">Des investisseurs qui ont arrêté de naviguer seuls</h2>
+    <p class="section-sub fx">Ils ont appliqué la méthode à leur propre patrimoine, accompagnés par Thomas et son équipe.</p>
+    <div class="testi-videos">
+      <figure class="testi-video fx">
+        <button class="tv-facade" data-src="https://drive.google.com/file/d/1l0QHUwZXhMNUfB_ZcYGBOKNmqwJYqbyr/preview" aria-label="Lire le témoignage de Viviana et Maxime">
+          <img src="assets/itw-viviana-maxime.jpg" alt="Témoignage de Viviana et Maxime" loading="lazy">
+          <span class="tv-play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1927"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+        <figcaption>Viviana &amp; Maxime</figcaption>
+      </figure>
+      <figure class="testi-video fx fx-d1">
+        <button class="tv-facade" data-src="https://drive.google.com/file/d/15PeAAvkpkXAK5W9aFKMFRD_-hfMCbpcT/preview" aria-label="Lire le témoignage de David et Marianne">
+          <img src="assets/itw-david-marianne.jpg" alt="Témoignage de David et Marianne" loading="lazy">
+          <span class="tv-play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1927"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+        <figcaption>David &amp; Marianne</figcaption>
+      </figure>
+      <figure class="testi-video fx fx-d2">
+        <button class="tv-facade" data-src="https://drive.google.com/file/d/11q48l1_uzczQLrEo7ltNIKwQ-SCEiLk6/preview" aria-label="Lire le témoignage de Louis">
+          <img src="assets/itw-louis.jpg" alt="Témoignage de Louis" loading="lazy">
+          <span class="tv-play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1927"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+        <figcaption>Louis</figcaption>
+      </figure>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fx">
+        <blockquote>Cette formation m'a réellement donné confiance pour optimiser mon patrimoine. Thomas est très réactif et apporte des retours complets à nos questions.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar">W</div>
+          <div><div class="testi-name">Wendy</div><div class="testi-role">Membre Investisseurs 3.0 · Avis vérifié</div></div>
+        </div>
+      </div>
+      <div class="testi-card fx fx-d1">
+        <blockquote>L'accompagnement est réel, et Thomas nous fait de vrais analyses et retours personnalisés. Une vraie logique, du plus général jusqu'au détail de notre portefeuille.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar">JN</div>
+          <div><div class="testi-name">Joan Negoce</div><div class="testi-role">Membre Investisseurs 3.0 · Avis vérifié</div></div>
+        </div>
+      </div>
+      <div class="testi-card fx fx-d2">
+        <blockquote>Chaque semaine j'étais en discussion avec Thomas pour poser mes questions et affiner ma stratégie d'investissement. J'y vois maintenant clair.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar">DF</div>
+          <div><div class="testi-name">Damien Fromentin</div><div class="testi-role">Membre Investisseurs 3.0 · Avis vérifié</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="testi-source fx">Avis vérifiés de membres, publiés sur investisseurs30.com</p>
+  </div>
+</section>
+
+<!-- ============================ LE MOT DE THOMAS ============================ -->
+<section class="block" id="thomas">
+  <div class="wrap-narrow">
+    <div class="about fx">
+      <img class="about-photo" src="assets/thomas.png" alt="Thomas Mayol, fondateur d'Investisseurs 3.0" loading="lazy">
+      <div>
+        <h2>Le mot de Thomas</h2>
+        <p class="about-role">Fondateur d'Investisseurs 3.0</p>
+        <p>« Ce live, c'est deux heures de ce que nous faisons chaque jour pour nos clients en gestion privée : prendre une situation réelle, la regarder en entier, placements, fiscalité, structuration, et décider.</p>
+        <p>Vous verrez la méthode complète, sur un cas réel, avec les chiffres. Ensuite, à vous de l'appliquer à vos 100&nbsp;000&nbsp;€. Seul, ou avec nous. »</p>
+        <div class="signature">« Investir, ce n'est pas prédire. C'est structurer. »</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section class="block" id="faq">
+  <div class="wrap">
+    <p class="section-eyebrow fx">Vos questions</p>
+    <h2 class="section-title fx">Avant de réserver</h2>
+    <div class="faq fx">
+      <details>
+        <summary>Est-ce vraiment gratuit ?</summary>
+        <p>Oui. Le live est offert, en ligne, sans engagement. Vous repartez avec la méthode complète et les réponses à vos questions.</p>
+      </details>
+      <details>
+        <summary>Où et comment se passe le live ?</summary>
+        <p>En direct, en ligne, sur un lien privé envoyé par e-mail après votre inscription et rappelé le jour J. Un navigateur suffit. Un ordinateur est préférable pour lire confortablement les tableaux.</p>
+      </details>
+      <details>
+        <summary>Je n'ai pas encore 100&nbsp;000&nbsp;€. Est-ce pour moi ?</summary>
+        <p>La logique de répartition, de fiscalité et de structuration reste la même quel que soit le montant. Le live prend 100&nbsp;000&nbsp;€ comme fil rouge parce que c'est à ce niveau que la structure commence à peser vraiment sur le résultat.</p>
+      </details>
+      <details>
+        <summary>Pourrai-je poser mes questions ?</summary>
+        <p>Oui, en direct, dans la dernière partie du live. Thomas, Benjamin et Ghislain y répondent en s'appuyant sur les cas du soir.</p>
+      </details>
+      <details>
+        <summary>Y aura-t-il un replay ?</summary>
+        <p>Le replay est envoyé aux inscrits le lendemain. Mais les questions, elles, ne se posent qu'en direct.</p>
+      </details>
+      <details>
+        <summary>Allez-vous me vendre quelque chose ?</summary>
+        <p>Le live, c'est de la méthode, des chiffres et vos questions. En fin de session, l'équipe ouvre un nombre limité de diagnostics patrimoniaux offerts, pour celles et ceux qui veulent appliquer la méthode à leur propre situation avec un expert.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BANDE FINALE ============================ -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2 class="fx"><span data-config="date-cap">Jeudi 24 septembre</span>, <span data-config="heure">20h</span>. <em>Votre place vous attend.</em></h2>
+    <p class="fx fx-d1">Deux heures en direct pour voir, sur un cas réel, comment les gestionnaires de fortune placent, optimisent et structurent 100&nbsp;000&nbsp;€.</p>
+    <span class="fx fx-d2" style="display:inline-block">
+      <a class="cta-btn mint goto-form" data-cta="Final" href="#inscription">Je réserve ma place <span class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
+    </span>
+    <p class="cta-note fx fx-d3">Gratuit · En ligne · Sans engagement</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img class="logo-pied" src="assets/logo-i3-blanc.svg" alt="Investisseurs 3.0">
+    <div class="footer-links">
+      <a href="https://investisseurs30.com/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a>
+      <a href="https://investisseurs30.com/politique-de-confidentialite/" target="_blank" rel="noopener">Politique de confidentialité</a>
+      <a href="https://investisseurs30.com/gestion-privee/" target="_blank" rel="noopener">Valar Gestion Privée</a>
+    </div>
+    <p class="footer-legal">Investisseurs 3.0 · Valar Gestion Privée, 58 rue de Monceau, 75008 Paris. Les informations présentées lors du live ne constituent pas un conseil en investissement personnalisé. Investir comporte des risques de perte en capital. Les performances passées ne préjugent pas des performances futures.</p>
+    <p class="footer-legal">Ce site n'est pas affilié à Facebook ni à Meta Platforms, Inc.</p>
+  </div>
+</footer>
+
+<!-- ============================ BARRE CTA ============================ -->
+<div class="barre" id="barre">
+  <div class="info">
+    <span>Live · <span data-config="date-num">24 septembre</span> · <span data-config="heure">20h</span></span>
+    <small id="barre-compte">Gratuit, en ligne</small>
+  </div>
+  <a href="#inscription" class="cta-btn goto-form" data-cta="Barre">Je réserve ma place</a>
+</div>
+
+<script>
+/* =====================================================================
+   CONFIG : la seule zone à modifier.
+   - SESSIONS : les dates des lives (heure de Paris). La page choisit toute
+     seule la prochaine : jusqu'à 30 min après la fin d'un live, il reste
+     affiché ; ensuite la page passe à la date suivante. Pour ajouter un
+     mois, ajouter une ligne. (Attention au décalage : +02:00 jusqu'au
+     25 octobre 2026, +01:00 ensuite.)
+   - WEBHOOK_URL : Apps Script « Live Investisseurs 3.0 · Inscriptions »
+     qui écrit dans le Google Sheet (upsert sur e-mail + session).
+     Vide = rien n'est envoyé, les données s'affichent dans la console.
+   - VISIO_URL : lien YouTube Live (non répertorié). Vide = l'écran de
+     confirmation dit que le lien arrive par e-mail.
+   - COMMUNAUTE_URL : lien d'invitation au groupe WhatsApp. Vide = bouton masqué.
+   - META_PIXEL_ID : pixel Meta. Vide = aucun pixel chargé. Avec un ID :
+     PageView à l'arrivée, Lead + CompleteRegistration à l'inscription,
+     tous envoyés en trackSingle (aucun autre pixel n'est pollué si la
+     page est un jour hébergée sur WordPress avec PixelYourSite).
+   Champs envoyés au Sheet : etape, session, prenom, nom, email, tel,
+   situation, source, horodateur.
+===================================================================== */
+const CONFIG = {
+  SESSIONS: [
+    "2026-09-24T20:00:00+02:00",
+    "2026-10-22T20:00:00+02:00",
+    "2026-11-26T20:00:00+01:00",
+    "2026-12-17T20:00:00+01:00"
+  ],
+  DUREE_MIN: 120,
+  TITRE_AGENDA: "Live Investisseurs 3.0 · Comment investir 100 000 €",
+  DETAILS_AGENDA: "La méthode complète des gestionnaires de fortune : placements, fiscalité, structuration. Deux heures en direct avec Thomas Mayol, Benjamin Forget et Ghislain Cayla (Valar Gestion Privée), sur des cas réels.\n\nLe lien du live arrive par e-mail avant le début.",
+  WEBHOOK_URL: "",
+  VISIO_URL: "",
+  VISIO_LABEL: "Rejoindre le live",
+  COMMUNAUTE_URL: "",
+  META_PIXEL_ID: "",
+  SOURCE: "lp-live-i3-v1"
+};
+
+const $ = id => document.getElementById(id);
+const mouvementReduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Pixel Meta (chargé seulement si un ID est configuré) ---------- */
+(function () {
+  if (!CONFIG.META_PIXEL_ID) return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', CONFIG.META_PIXEL_ID);
+  fbq('trackSingle', CONFIG.META_PIXEL_ID, 'PageView');
+})();
+function pixel(evenement, standard, params) {
+  if (!CONFIG.META_PIXEL_ID || typeof window.fbq !== 'function') return;
+  window.fbq(standard ? 'trackSingle' : 'trackSingleCustom', CONFIG.META_PIXEL_ID, evenement, params || {});
+}
+
+/* ---------- La session courante ---------- */
+const SESSION = (function () {
+  const maintenant = Date.now();
+  const marge = (CONFIG.DUREE_MIN + 30) * 60000;
+  const dates = CONFIG.SESSIONS.map(s => new Date(s)).filter(d => !isNaN(d));
+  let choisie = dates.find(d => d.getTime() + marge > maintenant) || dates[dates.length - 1];
+  const fin = new Date(choisie.getTime() + CONFIG.DUREE_MIN * 60000);
+  const fmt = opts => new Intl.DateTimeFormat('fr-FR', Object.assign({ timeZone: 'Europe/Paris' }, opts));
+  const jour = fmt({ weekday: 'long' }).format(choisie);                        // jeudi
+  const dateNum = fmt({ day: 'numeric', month: 'long' }).format(choisie);       // 24 septembre
+  const heureParts = d => {
+    const p = fmt({ hour: 'numeric', minute: '2-digit', hourCycle: 'h23' }).formatToParts(d);
+    const h = p.find(x => x.type === 'hour').value, m = p.find(x => x.type === 'minute').value;
+    return h + 'h' + (m === '00' ? '' : m);
+  };
+  const date = jour + ' ' + dateNum;
+  return {
+    debut: choisie,
+    fin: fin,
+    id: fmt({ year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(choisie).reduce((o, p) => (o[p.type] = p.value, o), {}),
+    jour: jour,
+    date: date,
+    dateCap: date.charAt(0).toUpperCase() + date.slice(1),
+    dateNum: dateNum,
+    heure: heureParts(choisie),
+    heureFin: heureParts(fin)
+  };
+})();
+SESSION.cle = SESSION.id.year + '-' + SESSION.id.month + '-' + SESSION.id.day;
+
+document.querySelectorAll('[data-config="date"]').forEach(el => el.textContent = SESSION.date);
+document.querySelectorAll('[data-config="date-cap"]').forEach(el => el.textContent = SESSION.dateCap);
+document.querySelectorAll('[data-config="date-num"]').forEach(el => el.textContent = SESSION.dateNum);
+document.querySelectorAll('[data-config="heure"]').forEach(el => el.textContent = SESSION.heure);
+document.querySelectorAll('[data-config="heure-fin"]').forEach(el => el.textContent = SESSION.heureFin);
+
+if (CONFIG.VISIO_URL) {
+  document.querySelectorAll('[data-config="visio"]').forEach(el => { el.href = CONFIG.VISIO_URL; el.textContent = CONFIG.VISIO_LABEL; });
+  document.querySelectorAll('[data-visio-bloc]').forEach(el => el.hidden = false);
+}
+if (CONFIG.COMMUNAUTE_URL) {
+  $('lien-communaute').href = CONFIG.COMMUNAUTE_URL;
+  $('lien-communaute').hidden = false;
+}
+
+/* ---------- État ---------- */
+const utm = (location.search.match(/utm_[^&]+/g) || []).map(decodeURIComponent).join(' ');
+const donnees = {
+  etape: "",
+  session: SESSION.cle,
+  prenom: "", nom: "", email: "", tel: "", situation: "",
+  source: CONFIG.SOURCE + (utm ? " · " + utm : "")
+};
+
+function envoyer(etape) {
+  donnees.etape = etape;
+  donnees.horodateur = new Date().toISOString();
+  if (!CONFIG.WEBHOOK_URL) {
+    console.warn("WEBHOOK_URL non configurée. Données non envoyées :", JSON.parse(JSON.stringify(donnees)));
+    return Promise.resolve();
+  }
+  return fetch(CONFIG.WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" }, // text/plain : pas de preflight CORS avec Apps Script
+    body: JSON.stringify(donnees)
+  }).catch(err => console.error("Envoi échoué :", err));
+}
+
+function marquerErreur(idChamp, enErreur) {
+  const el = $(idChamp);
+  el.classList.remove('invalide');
+  if (enErreur) { void el.offsetWidth; el.classList.add('invalide'); }
+  return !enErreur;
+}
+
+function afficherConfirmation(prenom, tel) {
+  $('conf-prenom').textContent = prenom ? ', ' + prenom : '';
+  $('conf-wa').textContent = tel ? ' et sur WhatsApp' : '';
+  $('etape-optin').classList.remove('visible');
+  $('etape-fin').classList.add('visible');
+  document.body.classList.add('inscrit');
+}
+
+/* ---------- Inscription ---------- */
+$('btn-optin').addEventListener('click', async () => {
+  const prenom = $('prenom').value.trim();
+  const nom = $('nom').value.trim();
+  const email = $('email').value.trim();
+  const situation = $('situation').value;
+  const tel = $('tel').value.trim();
+
+  let ok = true;
+  ok = marquerErreur('champ-prenom', prenom.length < 2) && ok;
+  ok = marquerErreur('champ-nom', nom.length < 2) && ok;
+  ok = marquerErreur('champ-email', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) && ok;
+  ok = marquerErreur('champ-situation', !situation) && ok;
+  ok = marquerErreur('champ-tel', tel !== '' && tel.replace(/\D/g, '').length < 9) && ok;
+  if (!ok) {
+    const premier = document.querySelector('.champ.invalide input, .champ.invalide select');
+    if (premier) premier.focus({ preventScroll: false });
+    return;
+  }
+
+  donnees.prenom = prenom;
+  donnees.nom = nom;
+  donnees.email = email;
+  donnees.situation = situation;
+  donnees.tel = tel;
+
+  const btn = $('btn-optin');
+  btn.disabled = true;
+  await envoyer('inscription');
+  btn.disabled = false;
+
+  pixel('Lead', true);
+  pixel('CompleteRegistration', true, { content_name: 'Live ' + SESSION.cle });
+  pixel('Webinar_Inscription');
+
+  try { localStorage.setItem('i3live-inscrit', JSON.stringify({ session: SESSION.cle, prenom: prenom, tel: !!tel })); } catch (e) {}
+
+  afficherConfirmation(prenom, tel);
+  $('inscription').scrollIntoView({ behavior: mouvementReduit ? 'auto' : 'smooth', block: 'start' });
+});
+
+// Déjà inscrit à cette session (retour sur la page) : on ré-affiche la confirmation
+(function () {
+  try {
+    const m = JSON.parse(localStorage.getItem('i3live-inscrit') || 'null');
+    if (m && m.session === SESSION.cle) afficherConfirmation(m.prenom, m.tel);
+  } catch (e) {}
+})();
+
+/* ---------- Compte à rebours discret (J−x, puis « En direct ») ---------- */
+(function () {
+  const badge = $('compte');
+  const ligne = $('barre-compte');
+  function afficher() {
+    const restant = SESSION.debut - new Date();
+    if (restant <= 0 && new Date() < SESSION.fin) {
+      badge.textContent = 'En direct';
+      badge.classList.add('direct');
+      badge.hidden = false;
+      ligne.textContent = "C'est maintenant";
+      return;
+    }
+    if (restant <= 0) { badge.hidden = true; return; }
+    const jours = Math.floor(restant / 86400000);
+    const heures = Math.floor((restant % 86400000) / 3600000);
+    const minutes = Math.floor((restant % 3600000) / 60000);
+    badge.textContent = jours > 0 ? ('J−' + jours) : (heures > 0 ? ('Dans ' + heures + 'h') : ('Dans ' + minutes + ' min'));
+    badge.hidden = false;
+    ligne.textContent = jours > 0 ? ('Dans ' + jours + ' jour' + (jours > 1 ? 's' : '') + ' · gratuit') : ('Dans ' + heures + ' h ' + String(minutes).padStart(2, '0'));
+  }
+  afficher();
+  setInterval(afficher, 30000);
+})();
+
+/* ---------- Compter les visites (anonyme, une fois par session de navigation) ---------- */
+(function () {
+  if (!CONFIG.WEBHOOK_URL) return;
+  try {
+    if (sessionStorage.getItem('i3live-visite')) return;
+    sessionStorage.setItem('i3live-visite', '1');
+  } catch (e) {}
+  fetch(CONFIG.WEBHOOK_URL, {
+    method: 'POST',
+    keepalive: true,
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({
+      etape: 'visite',
+      session: SESSION.cle,
+      horodateur: new Date().toISOString(),
+      appareil: matchMedia('(pointer: coarse)').matches ? 'mobile' : 'ordinateur',
+      provenance: document.referrer || '',
+      utm: utm
+    })
+  }).catch(() => {});
+})();
+
+/* ---------- Agenda : Google + fichier .ics, calculés depuis la session ---------- */
+(function () {
+  const debut = SESSION.debut, fin = SESSION.fin;
+  const utc = d => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const titre = CONFIG.TITRE_AGENDA;
+  const details = CONFIG.DETAILS_AGENDA + (CONFIG.VISIO_URL ? "\n\nLien du live : " + CONFIG.VISIO_URL : "");
+  const lieu = CONFIG.VISIO_URL || "En ligne";
+  const google = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+    + '&text=' + encodeURIComponent(titre)
+    + '&dates=' + utc(debut) + '/' + utc(fin)
+    + '&details=' + encodeURIComponent(details)
+    + '&location=' + encodeURIComponent(lieu)
+    + '&ctz=Europe/Paris';
+  const ics = [
+    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Investisseurs 3.0//Live//FR', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    'UID:live-' + SESSION.cle + '@investisseurs30',
+    'DTSTAMP:' + utc(debut), 'DTSTART:' + utc(debut), 'DTEND:' + utc(fin),
+    'SUMMARY:' + titre,
+    'DESCRIPTION:' + details.replace(/\n/g, '\\n'),
+    'LOCATION:' + lieu,
+    'BEGIN:VALARM', 'TRIGGER:-PT30M', 'ACTION:DISPLAY', 'DESCRIPTION:' + titre, 'END:VALARM',
+    'END:VEVENT', 'END:VCALENDAR'
+  ].join('\r\n');
+  document.querySelectorAll('[data-agenda-google]').forEach(a => a.href = google);
+  document.querySelectorAll('[data-agenda-ics]').forEach(a => a.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics));
+})();
+
+/* ---------- Boutons qui ramènent au formulaire ---------- */
+document.querySelectorAll('.goto-form').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    pixel('CTA_Click_' + (a.dataset.cta || 'Autre'));
+    $('inscription').scrollIntoView({ behavior: mouvementReduit ? 'auto' : 'smooth', block: 'start' });
+    setTimeout(() => { const p = $('prenom'); if (p && !document.body.classList.contains('inscrit')) p.focus({ preventScroll: true }); }, 600);
+  });
+});
+
+/* ---------- Témoignages vidéo : la vignette laisse place au lecteur au clic ---------- */
+(function () {
+  let ouvert = null;
+  document.querySelectorAll('.tv-facade').forEach(b => {
+    b.addEventListener('click', () => {
+      pixel('Testi_Video_Click');
+      if (ouvert) { ouvert.iframe.remove(); ouvert.btn.style.display = ''; }
+      const f = document.createElement('iframe');
+      f.src = b.dataset.src;
+      f.allow = 'autoplay; fullscreen; encrypted-media';
+      f.allowFullscreen = true;
+      f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
+      f.title = b.getAttribute('aria-label');
+      b.parentNode.insertBefore(f, b);
+      b.style.display = 'none';
+      ouvert = { iframe: f, btn: b };
+    });
+  });
+})();
+
+/* ---------- Apparitions au scroll ---------- */
+(function () {
+  const cibles = document.querySelectorAll('.fx:not(.in)');
+  if (mouvementReduit || !('IntersectionObserver' in window)) { cibles.forEach(el => el.classList.add('in')); return; }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  cibles.forEach(el => io.observe(el));
+})();
+
+/* ---------- Compteurs animés ---------- */
+(function () {
+  function formatCount(value, format) {
+    if (format === 'rating') return (value / 10).toFixed(1).replace('.', ',') + '/5';
+    if (format === 'k') return Math.round(value / 1000) + ' 000';
+    return String(Math.round(value)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
+  function animer(el) {
+    const target = parseInt(el.dataset.target, 10), format = el.dataset.format;
+    if (mouvementReduit) { el.textContent = formatCount(target, format); return; }
+    let start = null;
+    function tick(ts) {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / 1400, 1);
+      el.textContent = formatCount(target * (1 - Math.pow(1 - p, 3)), format);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { animer(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.count').forEach(el => io.observe(el));
+})();
+
+/* ---------- Jauge de lecture + barre CTA ---------- */
+(function () {
+  const jauge = $('jauge'), barre = $('barre'), carte = $('inscription');
+  let enAttente = false;
+  function dessiner() {
+    const y = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    jauge.style.transform = 'scaleX(' + (total > 0 ? Math.min(1, y / total) : 0) + ')';
+    const r = carte.getBoundingClientRect();
+    const carteVisible = r.bottom > 80 && r.top < window.innerHeight * 0.85;
+    barre.classList.toggle('montre', !carteVisible && y > 200);
+    enAttente = false;
+  }
+  window.addEventListener('scroll', () => { if (!enAttente) { enAttente = true; requestAnimationFrame(dessiner); } }, { passive: true });
+  window.addEventListener('resize', dessiner);
+  dessiner();
+})();
+
+/* ---------- Sections vues (pixel), une fois chacune ---------- */
+(function () {
+  if (!CONFIG.META_PIXEL_ID) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { pixel('View_' + e.target.id); io.unobserve(e.target); } });
+  }, { threshold: 0.3 });
+  ['programme', 'intervenants', 'temoignages', 'faq'].forEach(id => { const el = $(id); if (el) io.observe(el); });
+})();
+</script>
+</body>
+</html>
