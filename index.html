@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>Comment investir 100 000 € | Live gratuit Investisseurs 3.0</title>
-<meta name="description" content="Live gratuit avec Thomas Mayol et les experts de Valar Gestion Privée : la méthode utilisée en gestion privée pour investir 100 000 €. Placements, fiscalité, structuration, sur des cas réels.">
+<meta name="description" content="Live gratuit avec Thomas Mayol et les experts de Valar Gestion Privée : la méthode utilisée en gestion privée pour investir 100 000 €. Placements, fiscalité, structuration, sur un cas réel.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Comment investir 100 000 € pour créer un patrimoine qui travaille pour vous">
 <meta property="og:description" content="Live gratuit avec Thomas Mayol et les associés de Valar Gestion Privée. Placements, fiscalité, structuration, sur un cas réel. 40 diagnostics ouverts en fin de live.">
@@ -24,11 +24,11 @@
     --navy: #0f1927;
     --navy-soft: #5a6674;
     --mint: #80b9a5;
-    --mint-deep: #52836f;
+    --mint-deep: #497a66;
     --mint-wash: rgba(128, 185, 165, 0.16);
     --line: rgba(15, 25, 39, 0.09);
     --live: #de7362;
-    --live-deep: #c9503d;
+    --live-deep: #c64d3a;
     --wa: #25d366;
     --display: "Montserrat", -apple-system, "Segoe UI", sans-serif;
     --body: "Montserrat", -apple-system, "Segoe UI", sans-serif;
@@ -71,7 +71,7 @@
   .hero { position: relative; padding: 30px 0 56px; overflow: hidden; }
   .hero-glow { position: absolute; top: -220px; left: 50%; transform: translateX(-50%); width: 1000px; max-width: 100vw; height: 600px; background: radial-gradient(ellipse at center, var(--mint-wash), transparent 65%); pointer-events: none; }
   .hero > .wrap { position: relative; }
-  .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 56px; align-items: center; }
+  .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 56px; align-items: start; }
   .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mint-deep); background: var(--white); border: 1px solid rgba(82, 131, 111, 0.25); border-radius: 100px; padding: 8px 16px 8px 12px; margin-bottom: 26px; }
   .eyebrow-txt { line-height: 1.5; }
   .eyebrow .compte { flex: none; font-weight: 700; color: var(--navy); background: var(--mint-wash); border-radius: 100px; padding: 2px 9px; letter-spacing: 0.04em; }
@@ -311,7 +311,7 @@
   .footer-links { display: flex; justify-content: center; gap: 26px; flex-wrap: wrap; margin-bottom: 14px; }
   .footer-links a { color: rgba(239, 239, 239, 0.55); text-decoration: none; font-size: 0.8rem; }
   .footer-links a:hover { color: var(--mint); }
-  .footer-legal { font-size: 0.73rem; color: rgba(239, 239, 239, 0.4); max-width: 720px; margin: 0 auto; line-height: 1.6; }
+  .footer-legal { font-size: 0.73rem; color: rgba(239, 239, 239, 0.55); max-width: 720px; margin: 0 auto; line-height: 1.6; }
   .footer-legal + .footer-legal { margin-top: 10px; }
 
   .barre { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 14px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line); padding: 10px 18px calc(10px + env(safe-area-inset-bottom, 0px)); transform: translateY(110%); transition: transform 0.35s ease; }
@@ -332,9 +332,13 @@
   .consent-oui { background: var(--mint); color: var(--navy); }
 
   /* Avertissement réglementaire : police au moins égale au corps de page (RG AMF 325-12 II) */
-  .avertissement { margin-top: 16px; border: 1.5px solid rgba(15, 25, 39, 0.16); border-left: 4px solid var(--live); border-radius: 12px; background: var(--surface); padding: 13px 15px; font-size: 1rem; line-height: 1.5; color: var(--navy); }
+  .avertissement { margin-top: 16px; border: 1.5px solid rgba(15, 25, 39, 0.16); border-left: 4px solid var(--live); border-radius: 12px; background: var(--surface); padding: 13px 15px; font-size: inherit; font-weight: 500; line-height: 1.5; color: var(--navy); }
   .avertissement + .avertissement { margin-top: 10px; }
   .nb { white-space: nowrap; }
+  .cta-milieu { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: 22px; border: 1px solid var(--line); border-left: 4px solid var(--mint); border-radius: 16px; background: var(--surface); padding: 22px 26px; }
+  .cta-milieu p { font-size: 0.92rem; color: var(--navy-soft); line-height: 1.55; flex: 1; min-width: 260px; }
+  .cta-milieu p strong { color: var(--navy); }
+  .cta-milieu .cta-btn { flex: none; }
   .dr-mention { margin-top: 10px; font-size: 0.78rem !important; line-height: 1.5; color: rgba(255, 255, 255, 0.6); }
   .dr:not(.fiscal) .dr-mention { color: var(--navy-soft); }
   .avertissement.sombre { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.2); border-left-color: var(--live); color: rgba(255, 255, 255, 0.92); }
@@ -345,7 +349,8 @@
   .hero-reg a { color: var(--mint-deep); text-decoration: underline; text-underline-offset: 2px; }
 
   /* Minutage du live, dans la carte */
-  .minutage { display: grid; gap: 7px; margin-bottom: 16px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; }
+  .minutage { display: grid; gap: 7px; margin-top: 18px; padding: 14px; border: 1px dashed var(--line); border-radius: 12px; }
+  .minutage-titre { font-family: var(--display); font-weight: 900; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy-soft); margin-bottom: 2px; }
   .minutage > div { display: flex; gap: 10px; align-items: baseline; font-size: 0.8rem; color: var(--navy-soft); line-height: 1.4; }
   .minutage b { flex: none; font-family: var(--display); font-weight: 900; font-size: 0.78rem; color: var(--navy); width: 44px; }
   .minutage em { font-style: normal; color: var(--live-deep); font-weight: 700; }
@@ -360,6 +365,7 @@
   .consent-tel input { flex: none; width: 18px; height: 18px; margin-top: 2px; accent-color: var(--mint-deep); }
 
   /* Modale mentions légales et confidentialité */
+  html.modale-ouverte, html.modale-ouverte body { overflow: hidden; }
   .modale { position: fixed; inset: 0; z-index: 90; background: rgba(15, 25, 39, 0.62); display: flex; align-items: center; justify-content: center; padding: 16px; }
   .modale-panneau { position: relative; background: var(--white); border-radius: 18px; max-width: 780px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 32px 28px 28px; text-align: left; }
   .modale-panneau h2 { font-family: var(--display); font-weight: 900; font-size: 1.25rem; line-height: 1.25; margin-bottom: 10px; color: var(--navy); }
@@ -477,7 +483,7 @@
           <div class="dc"><b id="dcM">·</b><small>min</small></div>
         </div>
 
-        <p class="fenetre"><span class="live-dot"></span><span><b><span data-config="creneaux">40</span> diagnostics patrimoniaux</b> sont ouverts aux participants à la fin du live. Réservations jusqu'au <b id="fermeture">samedi 22h</b>, puis les créneaux retournent au planning normal.</span></p>
+        <p class="fenetre"><span class="live-dot"></span><span><b><span data-config="creneaux">40</span> diagnostics patrimoniaux</b> sont ouverts aux inscrits à la fin du live. Les personnes présentes en direct choisissent leur créneau en premier. Réservations jusqu'au <b id="fermeture">samedi 22h</b>.</span></p>
 
         <a class="cta-btn large" id="btnDirect" href="#" target="_blank" rel="noopener" data-track="cta_direct" style="margin-bottom:16px" hidden>Rejoindre le live maintenant <span class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
 
@@ -486,12 +492,6 @@
           <h2>Réservez votre place</h2>
           <p class="intro">Le lien du live vous est envoyé par e-mail, avec un rappel le jour J.</p>
 
-          <div class="minutage">
-            <div><b>20h00</b><span>Le cas réel, en vision 360° : placements, fiscalité, structuration</span></div>
-            <div><b>20h45</b><span>Le portefeuille <span class="nb">100&nbsp;000&nbsp;€</span> construit ligne par ligne</span></div>
-            <div><b>21h15</b><span><em>Le fichier du portefeuille remis aux personnes présentes</em></span></div>
-            <div><b>21h30</b><span>Vos questions, puis <em>l'ouverture des <span data-config="creneaux">40</span> diagnostics</em></span></div>
-          </div>
 
           <div class="champ" id="champ-prenom">
             <label class="etiquette" for="prenom">Prénom</label>
@@ -508,13 +508,13 @@
           <div class="champ" id="champ-tel">
             <label class="etiquette" for="tel">Téléphone <small>· facultatif</small></label>
             <div class="boite"><input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78" enterkeyhint="done"></div>
-            <p class="aide">Sur WhatsApp : votre lien du live, un rappel 15 minutes avant, et le lien prioritaire des diagnostics en fin de session.</p>
-            <label class="consent-tel"><input type="checkbox" id="consentTel" data-track="consent_tel"><span>J'accepte d'être contacté par téléphone et sur WhatsApp par Investisseurs 3.0 et Valar Gestion Privée au sujet du live et du diagnostic patrimonial.</span></label>
             <p class="erreur">Ce numéro ne semble pas valide.</p>
+            <p class="aide">Sur WhatsApp : votre lien du live et un rappel 15 minutes avant le début. C'est le moyen le plus sûr de ne pas le rater.</p>
+            <label class="consent-tel"><input type="checkbox" id="consentTel" data-track="consent_tel"><span>J'accepte d'être contacté par téléphone et sur WhatsApp par Investisseurs 3.0 et Valar Gestion Privée au sujet du live et du diagnostic patrimonial.</span></label>
           </div>
 
           <button class="cta-btn large" id="btn-optin" type="button" data-track="form_valider">Je réserve ma place <span class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></button>
-          <p class="une-fois"><span class="live-dot"></span><span>Une rediffusion part aux inscrits le lendemain. Vos questions, le fichier du portefeuille et les <span data-config="creneaux">40</span> diagnostics, eux, ne se jouent qu'en direct.</span></p>
+          <p class="une-fois"><span class="live-dot"></span><span>Une rediffusion part aux inscrits le lendemain. Le fichier du portefeuille et vos questions, eux, ne se jouent qu'en direct, et les présents choisissent leur diagnostic en premier.</span></p>
           <p class="compteur" id="compteur" hidden><span><b id="compteurN">0</b> personnes déjà inscrites pour le <span data-config="date-num">24 septembre</span></span></p>
           <p class="mention-rgpd">En validant, vous acceptez qu'Investisseurs 3.0 utilise ces informations pour vous envoyer le lien du live, les rappels et ses contenus sur l'investissement. Désinscription possible à tout moment. <a href="#" data-ouvre-legal data-track="lien_confidentialite">Politique de confidentialité</a>.</p>
           <p class="avertissement">Investir comporte un risque de perte en capital. Les performances passées ne préjugent pas des performances futures. Le portefeuille présenté pendant le live est un exemple pédagogique : ni recommandation personnalisée, ni offre.</p>
@@ -538,7 +538,7 @@
 
           <div class="perso" id="perso">
             <h3>Préparez votre soirée <small>30 secondes</small></h3>
-            <p>Deux réponses, deux usages : adapter les cas traités jeudi soir, et attribuer en priorité les <span data-config="creneaux">40</span> créneaux de diagnostic aux situations qui s'y prêtent.</p>
+            <p>Deux réponses, deux usages : adapter les cas traités jeudi soir, et préparer votre diagnostic si vous en réservez un à la fin du live.</p>
             <div class="champ" id="champ-montant">
               <label class="etiquette">Quel montant envisagez-vous d'investir ou de réorganiser ?</label>
               <div class="chips" role="radiogroup" data-track="perso_montant">
@@ -568,7 +568,7 @@
             <div class="champ" style="margin-bottom:12px">
               <label class="etiquette" for="question">Votre question pour le live <small>· facultatif</small></label>
               <div class="boite"><textarea id="question" name="question" maxlength="600" placeholder="Ex. : j'ai 150 000 € sur des livrets et un PEA, par quoi commencer sans tout bloquer ?"></textarea></div>
-              <p class="aide">Les questions reçues avant mercredi midi passent en premier. Elles sont traitées de façon générale et pédagogique, sans recommandation personnalisée.</p>
+              <p class="aide">Les questions reçues avant <span data-config="veille">la veille du live à midi</span> passent en premier. Elles sont traitées de façon générale et pédagogique, sans recommandation personnalisée.</p>
             </div>
             <button class="cta-btn" id="btn-perso" type="button" data-track="perso_envoyer">C'est envoyé à l'équipe</button>
             <p class="perso-ok" id="persoOk" hidden>Merci, c'est transmis à Thomas, Benjamin et Ghislain.</p>
@@ -580,12 +580,20 @@
           </a>
 
           <ul class="consignes">
-            <li><b>1</b><span><strong>Bloquez les deux heures, jusqu'à 22h.</strong> Les <span data-config="creneaux">40</span> diagnostics s'ouvrent à 21h30, et les présents choisissent leur créneau en premier.</span></li>
+            <li><b>1</b><span><strong>Bloquez les deux heures, jusqu'à 22h.</strong> Les <span data-config="creneaux">40</span> diagnostics s'ouvrent en fin de live, et les présents choisissent leur créneau en premier.</span></li>
             <li><b>2</b><span><strong>Préparez vos chiffres :</strong> montant disponible, placements actuels, tranche d'imposition. Vous en tirerez bien plus.</span></li>
             <li><b>3</b><span><strong>Connectez-vous à 19h55</strong>, sur ordinateur de préférence, pour lire les tableaux confortablement.</span></li>
           </ul>
 
-          <p class="conf-rappel">Une rediffusion part aux inscrits le lendemain. Le fichier du portefeuille, vos questions et les créneaux de diagnostic, eux, ne se jouent que pendant le direct.</p>
+          <p class="conf-rappel">Une rediffusion part aux inscrits le lendemain. Le fichier du portefeuille et vos questions ne se jouent que pendant le direct, et les présents choisissent leur créneau de diagnostic en premier.</p>
+        </div>
+
+        <div class="minutage">
+          <p class="minutage-titre">Le déroulé de la soirée</p>
+          <div><b>20h00</b><span>Le cas réel, en vision 360° : placements, fiscalité, structuration</span></div>
+          <div><b>20h45</b><span>Le portefeuille <span class="nb">100&nbsp;000&nbsp;€</span> construit ligne par ligne</span></div>
+          <div><b>21h15</b><span><em>Le fichier du portefeuille affiché à l'écran, pour les personnes présentes</em></span></div>
+          <div><b>21h30</b><span>Vos questions, puis <em>l'ouverture des <span data-config="creneaux">40</span> diagnostics</em></span></div>
         </div>
       </div>
     </div>
@@ -605,7 +613,7 @@
     </div>
     <div class="proof-item fx fx-d2">
       <div class="proof-num"><span class="count" data-target="49" data-format="rating">0</span></div>
-      <div class="proof-label">Sur Trustpilot</div>
+      <div class="proof-label">Sur Trustpilot · 69 avis</div>
     </div>
   </div>
 </div>
@@ -614,8 +622,8 @@
 <section class="block" id="direct" data-sec="direct">
   <div class="wrap">
     <p class="section-eyebrow fx">Ce que la rediffusion ne vous donnera pas</p>
-    <h2 class="section-title fx">Quatre choses ne se jouent que jeudi soir</h2>
-    <p class="section-sub fx">Il y a bien une rediffusion, envoyée aux inscrits le lendemain. Elle ne remplace rien de ce qui suit.</p>
+    <h2 class="section-title fx">Ce qui ne se joue que jeudi soir</h2>
+    <p class="section-sub fx">Il y a bien une rediffusion, envoyée aux inscrits le lendemain. Voici les trois choses qu'elle ne remplace pas. Et une échéance qui, elle, ne vient pas de nous.</p>
     <div class="direct">
       <div class="dr fx">
         <span class="dr-tag chaud">Réservé aux présents</span>
@@ -625,12 +633,12 @@
       <div class="dr fx fx-d1">
         <span class="dr-tag chaud"><span data-config="fenetre">48</span> heures</span>
         <h3><span data-config="creneaux">40</span> créneaux de diagnostic réservés aux participants</h3>
-        <p>À 21h30, l'équipe ouvre <strong><span data-config="creneaux">40</span> créneaux de diagnostic patrimonial offert</strong>. C'est la capacité réelle de nos conseillers pour la semaine qui suit. <strong>Les personnes présentes en direct choisissent en premier</strong>, les réservations ferment <span data-fermeture>samedi 22h</span>, puis les créneaux retournent au planning normal.</p>
+        <p>À la fin du live, l'équipe ouvre <strong><span data-config="creneaux">40</span> créneaux de diagnostic patrimonial offert</strong>. C'est la capacité réelle de nos conseillers pour la semaine qui suit. <strong>Les personnes présentes en direct choisissent leur créneau en premier</strong>, les réservations ferment <span data-fermeture>samedi 22h</span>, puis les créneaux retournent au planning normal.</p>
       </div>
       <div class="dr fx">
         <span class="dr-tag">En direct</span>
         <h3>Vos questions, traitées par les experts</h3>
-        <p>Une trentaine de minutes de questions, une vingtaine traitées à l'écran. <strong>Posez la vôtre dès l'inscription</strong> : celles reçues avant mercredi midi passent en premier. La rediffusion ne répondra pas à la vôtre.</p>
+        <p>Une trentaine de minutes de questions, une vingtaine traitées à l'écran. <strong>Posez la vôtre dès l'inscription</strong> : celles reçues avant <span data-config="veille">la veille à midi</span> passent en premier. La rediffusion ne répondra pas à la vôtre.</p>
       </div>
       <div class="dr fiscal fx fx-d1">
         <span class="dr-tag">Avant le 31 décembre</span>
@@ -681,7 +689,7 @@
       <div class="step fx fx-d1">
         <span class="step-tag">20h45 · Portefeuille</span>
         <h3>Le portefeuille 100&nbsp;000&nbsp;€ du live</h3>
-        <p>Construit de zéro le 24 septembre, ligne par ligne, avec la raison de chaque choix. Les sessions suivantes n'en montreront que le suivi : ce soir-là, vous prenez l'histoire au début.</p>
+        <p>Construit de zéro le <span data-config="date-num">24 septembre</span>, ligne par ligne, avec la raison de chaque choix. Les sessions suivantes n'en montreront que le suivi : ce soir-là, vous prenez l'histoire au début.</p>
       </div>
       <div class="step fx fx-d2">
         <span class="step-tag">21h30 · En direct</span>
@@ -701,6 +709,10 @@
         <li>Des réponses à vos questions, posées en direct.</li>
       </ul>
     </div>
+    <div class="cta-milieu fx">
+      <p><strong><span data-config="date-cap">Jeudi 24 septembre</span>, <span data-config="heure">20h</span>.</strong> Le fichier du portefeuille et vos questions ne se jouent que pendant le direct, et les <span data-config="creneaux">40</span> créneaux de diagnostic ferment <span data-fermeture>samedi 22h</span>.</p>
+      <a class="cta-btn goto-form" data-track="cta_milieu" href="#inscription">Je réserve ma place <span class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
+    </div>
   </div>
 </section>
 
@@ -709,13 +721,13 @@
   <div class="wrap">
     <p class="section-eyebrow fx">Les intervenants</p>
     <h2 class="section-title fx">Les experts qui accompagnent les clients de Valar Gestion Privée</h2>
-    <p class="section-sub fx">La gestion privée d'Investisseurs 3.0, indépendante des groupes bancaires et assurantiels. Ce qu'ils font chaque jour pour leurs clients, ils le font devant vous pendant deux heures.</p>
+    <p class="section-sub fx">Valar Gestion Privée est le cabinet de conseil patrimonial fondé par Thomas Mayol, non adossé à un groupe bancaire ou assurantiel. Ce que ses conseillers font chaque jour pour leurs clients, ils le font devant vous pendant deux heures.</p>
     <div class="hosts">
       <div class="host fx">
         <img src="assets/thomas-portrait.jpg" alt="Thomas Mayol" loading="lazy">
         <h3>Thomas Mayol</h3>
         <p class="role">Fondateur d'Investisseurs 3.0<br>Associé fondateur de Valar Gestion Privée</p>
-        <p>Diplômé d'emlyon, passé par la Banque de France et PwC, certifié AMF. Suivi par plus de 600&nbsp;000 personnes, il accompagne avec son équipe plus de 700 investisseurs dans la structuration de leur patrimoine. Il tient le fil rouge du live.</p>
+        <p>Diplômé d'emlyon, passé par la Banque de France et PwC, titulaire de la certification professionnelle AMF. Suivi par une communauté de plus de 600&nbsp;000 abonnés, il accompagne avec son équipe plus de 700 investisseurs dans la structuration de leur patrimoine. Il tient le fil rouge du live.</p>
       </div>
       <div class="host fx fx-d1">
         <img src="assets/benjamin.jpg" alt="Benjamin Forget" loading="lazy">
@@ -735,8 +747,8 @@
   <div class="marquee" aria-hidden="true">
     <p class="marquee-label">Parmi les solutions avec lesquelles l'équipe travaille</p>
     <div class="marquee-track">
-      <img src="assets/p-edr.png" alt="" loading="lazy"><img src="assets/p-bil.png" alt="" loading="lazy"><img src="assets/p-efg.png" alt="" loading="lazy"><img src="assets/p-generali.png" alt="" loading="lazy"><img src="assets/p-corum.png" alt="" loading="lazy"><img src="assets/p-uaf.png" alt="" loading="lazy"><img src="assets/p-wealins.png" alt="" loading="lazy">
-      <img src="assets/p-edr.png" alt="" loading="lazy"><img src="assets/p-bil.png" alt="" loading="lazy"><img src="assets/p-efg.png" alt="" loading="lazy"><img src="assets/p-generali.png" alt="" loading="lazy"><img src="assets/p-corum.png" alt="" loading="lazy"><img src="assets/p-uaf.png" alt="" loading="lazy"><img src="assets/p-wealins.png" alt="" loading="lazy">
+      <img src="assets/p-edr.png" alt="" loading="lazy"><img src="assets/p-bil.png" alt="" loading="lazy"><img src="assets/p-efg.png" alt="" loading="lazy"><img src="assets/p-generali.png" alt="" loading="lazy"><img src="assets/p-corum.png" alt="" loading="lazy">
+      <img src="assets/p-edr.png" alt="" loading="lazy"><img src="assets/p-bil.png" alt="" loading="lazy"><img src="assets/p-efg.png" alt="" loading="lazy"><img src="assets/p-generali.png" alt="" loading="lazy"><img src="assets/p-corum.png" alt="" loading="lazy">
     </div>
   </div>
 </section>
@@ -824,7 +836,7 @@
       </details>
       <details data-track="faq_replay">
         <summary>Y aura-t-il une rediffusion ?</summary>
-        <p>Oui. Une rediffusion est envoyée aux inscrits le lendemain. Trois choses n'y sont pas : le fichier du portefeuille, qui s'affiche uniquement pendant le direct, les questions-réponses, et le lien prioritaire vers les <span data-config="creneaux">40</span> créneaux de diagnostic, qui ferment <span data-fermeture>samedi 22h</span>.</p>
+        <p>Oui. Une rediffusion est envoyée aux inscrits le lendemain, et une version publique est mise en ligne quelques jours plus tard. Ni l'une ni l'autre ne contient le fichier du portefeuille, qui s'affiche uniquement pendant le direct. La version publique est en plus montée sans les questions-réponses. Et dans tous les cas, les <span data-config="creneaux">40</span> créneaux de diagnostic ferment <span data-fermeture>samedi 22h</span>.</p>
       </details>
       <details data-track="faq_direct">
         <summary>Pourquoi venir en direct plutôt qu'en rediffusion ?</summary>
@@ -832,7 +844,7 @@
       </details>
       <details data-track="faq_questions">
         <summary>Pourrai-je poser mes questions ?</summary>
-        <p>Oui, en direct, dans la dernière partie du live : une vingtaine de questions sont traitées à l'écran. Envoyez la vôtre dès votre inscription, celles reçues avant mercredi midi passent en premier. Les réponses sont générales et pédagogiques : une recommandation personnalisée suppose un rendez-vous avec Valar Gestion Privée, après recueil de votre situation.</p>
+        <p>Oui, en direct, dans la dernière partie du live : une vingtaine de questions sont traitées à l'écran. Envoyez la vôtre dès votre inscription, celles reçues avant <span data-config="veille">la veille à midi</span> passent en premier. Les réponses sont générales et pédagogiques : une recommandation personnalisée suppose un rendez-vous avec Valar Gestion Privée, après recueil de votre situation.</p>
       </details>
       <details data-track="faq_vente">
         <summary>Allez-vous me vendre quelque chose ?</summary>
@@ -840,7 +852,7 @@
       </details>
       <details data-track="faq_valar">
         <summary>Qui est Valar Gestion Privée, et comment êtes-vous rémunérés ?</summary>
-        <p>Valar Gestion Privée est la société de conseil patrimonial fondée par Thomas Mayol, indépendante des groupes bancaires et assurantiels. Elle est conseiller en investissements financiers et courtier en assurance, immatriculée à l'ORIAS sous le n° 26005776 et membre de la CNCEF Patrimoine, association agréée par l'AMF. Le mode de rémunération, honoraires et rémunérations liées aux solutions souscrites, est détaillé dans le document d'entrée en relation remis avant toute mission. Investisseurs 3.0, l'organisme de formation, n'est pas conseiller en investissements financiers.</p>
+        <p>Valar Gestion Privée est la société de conseil patrimonial fondée par Thomas Mayol, non adossée à un groupe bancaire ou assurantiel. Elle est conseiller en investissements financiers et courtier en assurance, immatriculée à l'ORIAS sous le n° 26005776 et membre de la CNCEF Patrimoine, association agréée par l'AMF. Le mode de rémunération, honoraires et rémunérations liées aux solutions souscrites, est détaillé dans le document d'entrée en relation remis avant toute mission. Investisseurs 3.0, l'organisme de formation, n'est pas conseiller en investissements financiers.</p>
       </details>
     </div>
   </div>
@@ -901,11 +913,11 @@
     <ul>
       <li><strong>Prénom et e-mail</strong> : vous inscrire au live, vous envoyer votre lien de connexion, les rappels et la rediffusion. Base légale : votre consentement.</li>
       <li><strong>Téléphone</strong>, si vous le donnez : vous envoyer le lien et le rappel sur WhatsApp. Tout appel ou message commercial au-delà du rappel suppose la case de consentement dédiée, cochée par vous, et dont la date est conservée comme preuve.</li>
-      <li><strong>Montant envisagé, situation et question</strong>, si vous les renseignez : préparer les cas traités pendant le live, et, si vous demandez un diagnostic, préparer ce rendez-vous.</li>
-      <li><strong>Mesure d'audience de la page</strong> : un identifiant technique aléatoire est déposé dans votre navigateur (durée 13 mois) pour distinguer les visites, avec le temps passé, la profondeur de lecture, les sections vues, les clics, le parcours dans le formulaire, la provenance, la campagne, le type d'appareil et la largeur d'écran. Ces informations servent uniquement à améliorer cette page. Aucune adresse IP n'est conservée, aucun recoupement avec d'autres sites n'est effectué.</li>
+      <li><strong>Montant envisagé, situation et question</strong>, si vous les renseignez : préparer les cas traités pendant le live, et, si vous demandez un diagnostic, préparer ce rendez-vous. Base légale : votre consentement.</li>
+      <li><strong>Mesure d'audience de la page</strong>, base légale : notre intérêt légitime à savoir si cette page est claire et utile. un identifiant technique aléatoire est déposé dans votre navigateur (durée 13 mois) pour distinguer les visites, avec le temps passé, la profondeur de lecture, les sections vues, les clics, le parcours dans le formulaire, la provenance, la campagne, le type d'appareil et la largeur d'écran. Ces informations servent uniquement à améliorer cette page. Aucune adresse IP n'est conservée, aucun recoupement avec d'autres sites n'est effectué.</li>
       <li><strong>Traceur publicitaire Meta</strong> : chargé uniquement si vous cliquez sur « Accepter » dans le bandeau prévu à cet effet. Refuser n'empêche pas de s'inscrire.</li>
     </ul>
-    <p>Aucun profilage automatisé, aucune décision automatisée.</p>
+    <p>Aucun profilage automatisé, aucune décision automatisée. Vous pouvez retirer votre consentement à tout moment, sans avoir à vous justifier : il suffit d'écrire à l'adresse de contact, ou d'utiliser le lien de désinscription présent dans chaque e-mail.</p>
 
     <h3>Qui les reçoit</h3>
     <p>Vos réponses sont enregistrées dans un tableur Google Sheets privé via Google Apps Script (Google Ireland Limited), accessible à l'équipe d'Investisseurs 3.0. Si vous demandez un diagnostic patrimonial, elles sont transmises à <strong>Valar Gestion Privée</strong>, qui le réalise. Les rappels WhatsApp passent par WhatsApp Ireland Limited. Des transferts hors Union européenne sont possibles, encadrés par les clauses contractuelles types de la Commission européenne.</p>
@@ -949,6 +961,11 @@ document.querySelectorAll('[data-config="date-num"]').forEach(el => el.textConte
 document.querySelectorAll('[data-config="heure"]').forEach(el => el.textContent = SESSION.heure);
 document.querySelectorAll('[data-config="heure-fin"]').forEach(el => el.textContent = SESSION.heureFin);
 document.querySelectorAll('[data-config="creneaux"]').forEach(el => el.textContent = CONFIG.CRENEAUX_DIAGNOSTIC);
+(function () {
+  const veille = new Date(SESSION.debut.getTime() - 864e5);
+  const t = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', weekday: 'long', day: 'numeric', month: 'long' }).format(veille) + ' à midi';
+  document.querySelectorAll('[data-config="veille"]').forEach(el => el.textContent = t);
+})();
 document.querySelectorAll('[data-config="fenetre"]').forEach(el => el.textContent = CONFIG.FENETRE_H);
 if (CONFIG.COMMUNAUTE_URL) { $('lien-communaute').href = CONFIG.COMMUNAUTE_URL; $('lien-communaute').hidden = false; }
 
@@ -1051,7 +1068,7 @@ const SUIVI = (function () {
       const k = en.target.dataset.sec;
       if (!e.secs.includes(k)) { e.secs.push(k); sale = true; }
       io.unobserve(en.target);
-    }), { threshold: 0.35 });
+    }), { threshold: 0, rootMargin: '0px 0px -35% 0px' });
     document.querySelectorAll('[data-sec]').forEach(el => io.observe(el));
   }
 
@@ -1149,9 +1166,9 @@ function marquerErreur(idChamp, enErreur, nom) {
   return !enErreur;
 }
 
-function afficherConfirmation(prenom, tel) {
+function afficherConfirmation(prenom, surWhatsApp) {
   $('conf-prenom').textContent = prenom ? ', ' + prenom : '';
-  $('conf-wa').textContent = tel ? ' et sur WhatsApp' : '';
+  $('conf-wa').textContent = surWhatsApp ? ' et sur WhatsApp' : '';
   $('etape-optin').classList.remove('visible');
   $('etape-fin').classList.add('visible');
   document.body.classList.add('inscrit');
@@ -1177,8 +1194,8 @@ $('btn-optin').addEventListener('click', async () => {
   SUIVI.inscrit();
   PIXEL.evt('Lead', true);
   PIXEL.evt('CompleteRegistration', true, { content_name: 'Live ' + SESSION.cle });
-  try { localStorage.setItem('i3live-inscrit', JSON.stringify({ session: SESSION.cle, prenom, tel: !!tel, email })); } catch (e) {}
-  afficherConfirmation(prenom, tel);
+  try { localStorage.setItem('i3live-inscrit', JSON.stringify({ session: SESSION.cle, prenom, wa: consentTel, email })); } catch (e) {}
+  afficherConfirmation(prenom, consentTel);
   $('inscription').scrollIntoView({ behavior: mouvementReduit ? 'auto' : 'smooth', block: 'start' });
 });
 
@@ -1220,7 +1237,7 @@ $('btn-perso').addEventListener('click', async () => {
     if (m && m.session === SESSION.cle) {
       donnees.email = m.email || ''; donnees.prenom = m.prenom || '';
       if (!donnees.email) $('perso').hidden = true;
-      afficherConfirmation(m.prenom, m.tel);
+      afficherConfirmation(m.prenom, m.wa);
     }
   } catch (e) {}
 })();
@@ -1268,7 +1285,9 @@ const FERMETURE = new Date(SESSION.fin.getTime() + (CONFIG.FENETRE_H || 48) * 36
     $('dcJ').textContent = j; $('dcH').textContent = String(h).padStart(2, '0'); $('dcM').textContent = String(m).padStart(2, '0');
     badge.textContent = j > 0 ? ('J−' + j) : (h > 0 ? ('Dans ' + h + ' h') : ('Dans ' + m + ' min'));
     badge.hidden = false;
-    ligne.textContent = j > 0 ? ('Dans ' + j + ' j ' + h + ' h · gratuit') : ('Dans ' + h + ' h ' + String(m).padStart(2, '0') + ' · gratuit');
+    ligne.textContent = restant > 48 * 36e5
+      ? ('Gratuit · ' + CONFIG.CRENEAUX_DIAGNOSTIC + ' diagnostics en fin de live')
+      : (j > 0 ? ('Plus que ' + j + ' j ' + h + ' h') : ('Plus que ' + h + ' h ' + String(m).padStart(2, '0')));
   }
   afficher();
   setInterval(afficher, 20000);
@@ -1307,8 +1326,8 @@ const FERMETURE = new Date(SESSION.fin.getTime() + (CONFIG.FENETRE_H || 48) * 36
 (function () {
   const modale = $('modale-legal'), fermer = $('fermer-legal');
   let declencheur = null;
-  function ouvrir(ev) { ev.preventDefault(); declencheur = ev.currentTarget; modale.hidden = false; document.body.style.overflow = 'hidden'; fermer.focus(); }
-  function refermer() { modale.hidden = true; document.body.style.overflow = ''; if (declencheur) declencheur.focus(); }
+  function ouvrir(ev) { ev.preventDefault(); declencheur = ev.currentTarget; modale.hidden = false; document.documentElement.classList.add('modale-ouverte'); fermer.focus(); }
+  function refermer() { modale.hidden = true; document.documentElement.classList.remove('modale-ouverte'); if (declencheur) declencheur.focus(); }
   document.querySelectorAll('[data-ouvre-legal]').forEach(a => a.addEventListener('click', ouvrir));
   fermer.addEventListener('click', refermer);
   modale.addEventListener('click', ev => { if (ev.target === modale) refermer(); });

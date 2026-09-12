@@ -29,7 +29,7 @@ window.CONFIG = {
   CRENEAUX_DIAGNOSTIC: 40,
   FENETRE_H: 48,
   TITRE_AGENDA: "Live Investisseurs 3.0 · Comment investir 100 000 €",
-  DETAILS_AGENDA: "La méthode complète des gestionnaires de fortune : placements, fiscalité, structuration. Deux heures en direct avec Thomas Mayol, Benjamin Forget et Ghislain Cayla (Valar Gestion Privée), sur des cas réels.\n\nRéservé aux présents : le fichier du portefeuille du live et les créneaux de diagnostic ouverts 48 heures.",
+  DETAILS_AGENDA: "La méthode complète utilisée en gestion privée : placements, fiscalité, structuration. Deux heures en direct avec Thomas Mayol, Benjamin Forget et Ghislain Cayla (Valar Gestion Privée), sur un cas réel.\n\nAu programme : 20h00 le cas réel, 20h45 le portefeuille 100 000 € construit ligne par ligne, 21h15 le fichier remis aux personnes présentes, 21h30 vos questions puis l'ouverture des 40 créneaux de diagnostic.\n\nLe fichier du portefeuille et vos questions ne se jouent que pendant le direct.",
   URL_PAGE: "https://alexyoucompte99-lang.github.io/live-investisseurs30/",
   WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbwQ0CA81iPnB3LUtSSAN1D2sridDn9yCdlZut4ey6Xm4obE_-k6FqeJQT9NBr_ii_nrpw/exec",
   VISIO_URL: "",
