@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Réserver votre diagnostic patrimonial | Investisseurs 3.0</title>
+<meta property="og:title" content="Votre diagnostic patrimonial offert · Investisseurs 3.0">
+<meta property="og:description" content="40 créneaux ouverts aux inscrits du live. Les présents choisissent en premier. Réservations jusqu'à samedi 22h.">
+<meta property="og:image" content="https://alexyoucompte99-lang.github.io/live-investisseurs30/assets/og.jpg">
+<meta name="theme-color" content="#0f1927">
+<link rel="icon" type="image/svg+xml" href="assets/logo-i3.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://app.iclosed.io">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<script src="config.js"></script>
+<!--
+  PAGE DE RÉSERVATION DES DIAGNOSTICS (CTA de fin de live).
+  Lit config.js : SESSIONS, DUREE_MIN, CRENEAUX_DIAGNOSTIC, FENETRE_H, WEBHOOK_URL, URL_PAGE.
+
+  Trois états calculés côté page, à l'heure de Paris :
+    avant   : jusqu'à l'ouverture (fin du live moins OUVERTURE_AVANT_FIN_MIN, soit 21h30 pour un live 20h-22h)
+              -> pas de calendrier, compte à rebours, rechargement automatique à l'ouverture.
+    ouvert  : de l'ouverture à la fermeture (fin du live + FENETRE_H heures = samedi 22h)
+              -> compteur de créneaux restants (route ?action=creneaux du webhook, sinon « 40 créneaux ouverts »),
+                 décompte jusqu'à la fermeture, calendrier iClosed embarqué.
+    ferme   : après la fermeture -> aucun lien de réservation, retour au planning normal, bouton vers le prochain live.
+
+  Paramètres d'URL :
+    ?s=2026-09-24        clé de session (sinon : la première session dont la fermeture n'est pas passée)
+    ?i=<Id>              identifiant de l'inscrit (colonne « Id » du Sheet) : noté dans « Clics lien live », source « diagnostics »
+    ?ok=1&Invitee_email=…&event_start_time=…   retour iClosed après réservation (si l'URL de redirection
+                         d'iClosed pointe ici) : la page note la réservation (etape diag_reserve) et confirme
+    ?test=avant|ouvert|ferme[&restants=12]     aperçu forcé d'un état (aucun appel réseau, rien n'est écrit)
+
+  Lien à afficher à l'écran à 21h30 : URL_PAGE + diagnostic.html (raccourci CNAME à venir, voir README).
+  iClosed : iframe brute + écouteur « openInParentTab » (sans widget.js), comme la LP VSL.
+-->
+<style>
+  :root {
+    --white: #ffffff;
+    --surface: #f6f8f8;
+    --navy: #0f1927;
+    --navy-soft: #5a6674;
+    --mint: #80b9a5;
+    --mint-deep: #497a66;
+    --mint-wash: rgba(128, 185, 165, 0.16);
+    --line: rgba(15, 25, 39, 0.09);
+    --live: #de7362;
+    --live-deep: #c64d3a;
+    --display: "Montserrat", -apple-system, "Segoe UI", sans-serif;
+    --body: "Montserrat", -apple-system, "Segoe UI", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { overflow-x: hidden; }
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; overflow-x: clip; }
+  img, iframe, svg { max-width: 100%; }
+  body { background: var(--white); color: var(--navy); font-family: var(--body); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  strong { font-weight: 700; }
+  a { color: var(--mint-deep); }
+  .wrap { width: 100%; max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+  header { padding: 18px 0; border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  header img { height: 32px; width: auto; display: block; }
+  .header-badge { display: flex; align-items: center; gap: 8px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy-soft); white-space: nowrap; }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--live); animation: pulse-live 1.8s ease infinite; flex: none; }
+  @keyframes pulse-live { 0%, 100% { box-shadow: 0 0 0 0 rgba(222, 115, 98, 0.45); } 50% { box-shadow: 0 0 0 7px rgba(222, 115, 98, 0); } }
+
+  .hero { position: relative; padding: 40px 0 22px; text-align: center; overflow: hidden; }
+  .hero-glow { position: absolute; top: -260px; left: 50%; transform: translateX(-50%); width: 900px; max-width: 100vw; height: 560px; background: radial-gradient(ellipse at center, var(--mint-wash), transparent 65%); pointer-events: none; }
+  .hero > :not(.hero-glow) { position: relative; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint-deep); background: var(--white); border: 1px solid rgba(82, 131, 111, 0.25); border-radius: 100px; padding: 7px 14px; margin-bottom: 20px; max-width: 100%; }
+  .eyebrow span { white-space: normal; text-align: left; }
+  h1 { font-family: var(--display); font-weight: 900; font-size: clamp(1.75rem, 4.5vw, 2.5rem); line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; margin-bottom: 14px; }
+  .hero-sub { font-size: clamp(0.98rem, 1.6vw, 1.08rem); color: var(--navy-soft); max-width: 600px; margin: 0 auto; text-wrap: pretty; }
+  .hero-sub strong { color: var(--navy); }
+
+  /* Bandeau d'état */
+  .etat { margin: 22px auto 0; border-radius: 16px; padding: 18px 20px; text-align: center; background: var(--navy); color: #fff; }
+  .etat .titre { font-family: var(--display); font-weight: 900; font-size: clamp(1.15rem, 3vw, 1.45rem); line-height: 1.25; letter-spacing: -0.01em; }
+  .etat .titre em { font-style: normal; color: var(--mint); }
+  .etat .sous { margin-top: 6px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.78); line-height: 1.55; }
+  .etat .sous b { color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .etat.ouvert { background: var(--live-deep); }
+  .etat.ouvert .titre em { color: #fff; }
+  .etat.ferme { background: var(--surface); color: var(--navy); border: 1.5px solid var(--line); }
+  .etat.ferme .sous { color: var(--navy-soft); }
+  .etat.ferme .sous b { color: var(--navy); }
+  .decompte { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+  .dc { min-width: 62px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 8px 6px 6px; }
+  .dc b { display: block; font-family: var(--display); font-weight: 900; font-size: 1.5rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .dc small { display: block; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.65); margin-top: 2px; }
+  .etat .note { margin-top: 12px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.7); line-height: 1.5; }
+
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--display); font-weight: 700; font-size: 1rem; color: var(--white) !important; background: var(--navy); border: 0; border-radius: 12px; padding: 16px 30px; cursor: pointer; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform 0.18s ease, box-shadow 0.18s ease; box-shadow: 0 14px 34px -14px rgba(15, 25, 39, 0.5); margin-top: 16px; max-width: 100%; }
+  .cta-btn:hover { transform: translateY(-1px); }
+  .cta-btn.mint { background: var(--mint); color: var(--navy) !important; box-shadow: 0 16px 40px -14px rgba(128, 185, 165, 0.5); }
+
+  section { padding: 26px 0 0; }
+  .section-title { font-family: var(--display); font-weight: 900; font-size: 1.2rem; letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 12px; }
+  .lignes { list-style: none; display: grid; gap: 10px; }
+  .lignes li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.95rem; line-height: 1.55; color: var(--navy-soft); }
+  .lignes li b { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--mint-wash); color: var(--mint-deep); font-family: var(--display); font-weight: 900; font-size: 0.74rem; display: flex; align-items: center; justify-content: center; margin-top: 3px; }
+  .lignes li strong { color: var(--navy); }
+  .cadre { margin-top: 14px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); padding: 12px 14px; font-size: 0.86rem; line-height: 1.55; color: var(--navy); }
+
+  /* Calendrier iClosed */
+  .iclosed-embed { margin: 0 auto; height: 640px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+  .iclosed-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .cta-note { margin-top: 10px; font-size: 0.8rem; color: var(--navy-soft); text-align: center; }
+  .confirm { text-align: center; border-radius: 16px; border: 1.5px solid rgba(82, 131, 111, 0.35); background: var(--mint-wash); padding: 24px 20px; }
+  .confirm h2 { font-family: var(--display); font-weight: 900; font-size: 1.3rem; margin-bottom: 8px; }
+  .confirm p { color: var(--navy-soft); font-size: 0.95rem; }
+  .confirm p b { color: var(--navy); }
+
+  .avertissement { margin-top: 20px; border: 1.5px solid rgba(15, 25, 39, 0.16); border-left: 4px solid var(--live); border-radius: 12px; background: var(--surface); padding: 13px 15px; font-size: inherit; font-weight: 500; line-height: 1.5; color: var(--navy); }
+  .agrements { margin: 28px auto 0; font-size: 0.82rem; color: var(--navy-soft); line-height: 1.6; text-align: center; }
+
+  footer { margin-top: 36px; background: var(--navy); border-top: 1px solid rgba(239, 239, 239, 0.1); padding: 34px 0 40px; text-align: center; }
+  footer .logo-pied { height: 32px; width: auto; margin: 0 auto 16px; display: block; opacity: 0.9; }
+  .footer-links { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; margin-bottom: 14px; }
+  .footer-links a { color: rgba(239, 239, 239, 0.55); text-decoration: none; font-size: 0.8rem; }
+  .footer-links a:hover { color: var(--mint); }
+  .footer-legal { font-size: 0.82rem; color: rgba(239, 239, 239, 0.62); max-width: 720px; margin: 0 auto; line-height: 1.6; }
+  .footer-legal + .footer-legal { margin-top: 10px; }
+  .footer-legal strong { color: rgba(239, 239, 239, 0.85); }
+
+  /* Modale mentions légales et confidentialité (copie de index.html, à garder synchronisée) */
+  html.modale-ouverte, html.modale-ouverte body { overflow: hidden; }
+  .modale { position: fixed; inset: 0; z-index: 90; background: rgba(15, 25, 39, 0.62); display: flex; align-items: center; justify-content: center; padding: 16px; }
+  .modale-panneau { position: relative; background: var(--white); border-radius: 18px; max-width: 780px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 32px 28px 28px; text-align: left; }
+  .modale-panneau h2 { font-family: var(--display); font-weight: 900; font-size: 1.25rem; line-height: 1.25; margin-bottom: 10px; color: var(--navy); }
+  .modale-panneau h3 { font-family: var(--display); font-weight: 900; font-size: 0.95rem; margin: 20px 0 6px; color: var(--navy); }
+  .modale-panneau p, .modale-panneau li { font-size: 0.86rem; color: var(--navy-soft); line-height: 1.6; }
+  .modale-panneau ul { margin: 6px 0 0 18px; }
+  .modale-fermer { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: var(--surface); font-size: 20px; line-height: 1; cursor: pointer; color: var(--navy); }
+
+  .ruban-test { position: fixed; top: 0; left: 0; z-index: 99; background: var(--live-deep); color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-bottom-right-radius: 8px; }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--mint-deep); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } .cta-btn { transition: none; } }
+  @media (max-width: 480px) {
+    header .header-badge { display: none; }
+    .hero { padding-top: 30px; }
+    .etat { padding: 16px 14px; }
+    .dc { min-width: 56px; }
+    .iclosed-embed { border-radius: 10px; }
+    .modale-panneau { padding: 26px 18px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img src="assets/logo-i3.svg" alt="Investisseurs 3.0">
+    <div class="header-badge"><span class="live-dot" aria-hidden="true"></span>Live du <span data-config="date">jeudi 24 septembre</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="eyebrow"><span>Réservé aux inscrits du live</span></div>
+    <h1>Votre diagnostic patrimonial offert</h1>
+    <p class="hero-sub"><strong><span data-config="n">40</span> créneaux</strong> ouverts aux inscrits du live du <span data-config="date-num">24 septembre</span>. Les présents choisissent en premier. Réservations jusqu'à <strong><span data-config="fermeture">samedi 26 septembre 22h</span></strong>.</p>
+  </div>
+
+  <!-- État AVANT -->
+  <div class="etat" id="etat-avant" hidden>
+    <div class="titre">Les <em><span data-config="n">40</span> créneaux</em> s'ouvrent à la fin du live, <span id="avant-quand">ce soir</span> vers <span data-config="ouverture-h">21h30</span>.</div>
+    <div class="decompte" aria-live="off">
+      <div class="dc"><b id="av-j">00</b><small>jours</small></div>
+      <div class="dc"><b id="av-h">00</b><small>heures</small></div>
+      <div class="dc"><b id="av-m">00</b><small>min</small></div>
+      <div class="dc"><b id="av-s">00</b><small>sec</small></div>
+    </div>
+    <p class="note">Gardez cette page ouverte : elle se met à jour toute seule à l'ouverture. Aucun lien de réservation n'existe avant la fin du live.</p>
+  </div>
+
+  <!-- État OUVERT -->
+  <div class="etat ouvert" id="etat-ouvert" hidden>
+    <div class="titre" id="ouvert-titre"><span data-config="n">40</span> créneaux ouverts</div>
+    <div class="sous">Fermeture <b data-config="fermeture">samedi 26 septembre 22h</b> · dans <b id="ouvert-reste">48 h</b>, puis retour au planning normal.</div>
+  </div>
+
+  <!-- État FERMÉ -->
+  <div class="etat ferme" id="etat-ferme" hidden>
+    <div class="titre">Les réservations liées au live du <span data-config="date-num">24 septembre</span> sont fermées depuis <span data-config="fermeture">samedi 26 septembre 22h</span>.</div>
+    <div class="sous">Retour au planning normal. <span id="ferme-prochain">Prochain live : <b data-config="prochain">jeudi 22 octobre à 20h</b>.</span></div>
+    <a class="cta-btn" id="btn-prochain" href="index.html">M'inscrire au prochain live</a>
+  </div>
+
+  <section>
+    <h2 class="section-title">Le rendez-vous</h2>
+    <ul class="lignes">
+      <li><b>1</b><span><strong>30 à 45 minutes en visio</strong> avec un conseiller de Valar Gestion Privée, la société de conseil patrimonial fondée par Thomas Mayol.</span></li>
+      <li><b>2</b><span><strong>Votre situation et vos objectifs</strong> : ce que vous avez, ce que vous visez, l'horizon et la fiscalité qui va avec.</span></li>
+      <li><b>3</b><span><strong>La méthode du live appliquée à vos chiffres</strong> : où se situent les marges de manœuvre, et par quoi commencer.</span></li>
+    </ul>
+    <div class="cadre">Rien n'est vendu pendant le diagnostic. Aucune recommandation personnalisée n'est formulée sans recueil préalable de votre situation et remise du document d'entrée en relation.</div>
+  </section>
+
+  <!-- Calendrier (état ouvert seulement) -->
+  <section id="bloc-calendrier" hidden>
+    <h2 class="section-title">Choisissez votre créneau</h2>
+    <div class="iclosed-embed">
+      <!-- iframe brute : la source n'est posée qu'à l'état ouvert. Pas de widget.js (redimensionnement instable) ;
+           la redirection après réservation passe par l'écouteur « message » plus bas. -->
+      <iframe id="iclosed" data-src="https://app.iclosed.io/e/investisseurs-3-0/appel-diagnostic-audit-investisseurs-3-0" title="Réserver votre diagnostic patrimonial" loading="eager"></iframe>
+    </div>
+    <p class="cta-note">Le calendrier ne s'affiche pas ? <a id="lien-secours" href="#" target="_blank" rel="noopener">Ouvrir la réservation</a></p>
+  </section>
+
+  <!-- Plus aucun créneau -->
+  <section id="bloc-complet" hidden>
+    <div class="confirm">
+      <h2>Les <span data-config="n">40</span> créneaux sont pris.</h2>
+      <p>Tous les créneaux ouverts à la fin du live ont été réservés. Le prochain live en ouvrira de nouveaux : <b data-config="prochain">jeudi 22 octobre à 20h</b>.</p>
+      <a class="cta-btn" href="index.html">M'inscrire au prochain live</a>
+    </div>
+  </section>
+
+  <!-- Retour iClosed après réservation -->
+  <section id="bloc-ok" hidden>
+    <div class="confirm">
+      <h2>Votre créneau est réservé.</h2>
+      <p id="ok-texte">Vous recevrez la confirmation par e-mail avec le lien de la visio.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Ce qu'il faut préparer</h2>
+    <ul class="lignes">
+      <li><b>1</b><span><strong>Le montant disponible</strong> à investir, même approximatif.</span></li>
+      <li><b>2</b><span><strong>Vos placements actuels</strong> : livrets, assurance vie, PEA, immobilier, PER.</span></li>
+      <li><b>3</b><span><strong>Votre tranche d'imposition</strong> (elle est sur votre dernier avis).</span></li>
+      <li><b>4</b><span><strong>Le fichier du portefeuille</strong> noté pendant le live, si vous l'avez.</span></li>
+    </ul>
+    <p class="avertissement">Investir comporte un risque de perte en capital. Les performances passées ne préjugent pas des performances futures. Le diagnostic a une vocation pédagogique : il ne constitue ni une recommandation personnalisée, ni une offre de souscription.</p>
+    <p class="agrements">Valar Gestion Privée, SAS, conseiller en investissements financiers (CIF) et courtier en assurance, immatriculée à l'ORIAS sous le n°&nbsp;26005776, <a href="https://www.orias.fr" target="_blank" rel="noopener">vérifiable sur orias.fr</a>, membre de la CNCEF Patrimoine, association professionnelle agréée par l'AMF. Investisseurs 3.0 est un organisme de formation : le conseil patrimonial est fourni par Valar Gestion Privée.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="logo-pied" src="assets/logo-i3-blanc.svg" alt="Investisseurs 3.0">
+    <div class="footer-links">
+      <a href="#" data-ouvre-legal>Mentions légales et confidentialité</a>
+      <a href="https://investisseurs30.com/gestion-privee/" target="_blank" rel="noopener">Valar Gestion Privée</a>
+      <a href="https://www.orias.fr" target="_blank" rel="noopener">Registre ORIAS</a>
+    </div>
+    <p class="footer-legal"><strong>Valar Gestion Privée</strong>, SAS, RCS Paris 101 079 382, 58 rue de Monceau, 75008 Paris. Conseiller en investissements financiers (CIF) et courtier en assurance (COA), immatriculée à l'ORIAS sous le n° 26005776, vérifiable sur www.orias.fr, membre de la CNCEF Patrimoine, association professionnelle agréée par l'AMF. <strong>Investisseurs 3.0</strong> est un organisme de formation et n'est pas conseiller en investissements financiers : le conseil patrimonial est fourni par Valar Gestion Privée, après recueil de votre situation et remise du document d'entrée en relation.</p>
+    <p class="footer-legal">Le diagnostic a une vocation pédagogique : les informations présentées ne constituent ni une recommandation personnalisée, ni une offre de souscription. Investir comporte un risque de perte en capital. Les performances passées ne préjugent pas des performances futures. Le traitement fiscal dépend de la situation individuelle de chaque client et il est susceptible d'être modifié ultérieurement.</p>
+    <p class="footer-legal">Ce site n'est pas affilié à Facebook ni à Meta Platforms, Inc.</p>
+  </div>
+</footer>
+
+<!-- ============ MENTIONS LÉGALES ET CONFIDENTIALITÉ (copie de index.html) ============ -->
+<div class="modale" id="modale-legal" role="dialog" aria-modal="true" aria-labelledby="titre-legal" hidden>
+  <div class="modale-panneau">
+    <button class="modale-fermer" id="fermer-legal" type="button" aria-label="Fermer">&times;</button>
+
+    <h2 id="titre-legal">Mentions légales</h2>
+
+    <h3>Éditeur de la page</h3>
+    <p>Investisseurs 3.0, organisme de formation, SIRET 984 189 027 00019, 58 rue de Monceau, 75008 Paris. Directeur de la publication : Thomas Mayol. Contact : <a href="mailto:contact@academiedesinvestisseurs.com">contact@academiedesinvestisseurs.com</a>.</p>
+
+    <h3>Conseil patrimonial</h3>
+    <p>Le diagnostic patrimonial et toute recommandation personnalisée sont fournis par <strong>Valar Gestion Privée</strong>, SAS, RCS Paris 101 079 382, 58 rue de Monceau, 75008 Paris. Conseiller en investissements financiers (CIF) et courtier en assurance (COA), immatriculée à l'ORIAS sous le n° 26005776, <a href="https://www.orias.fr" target="_blank" rel="noopener">vérifiable sur orias.fr</a>, membre de la CNCEF Patrimoine, association professionnelle agréée par l'Autorité des marchés financiers. Investisseurs 3.0 n'est pas conseiller en investissements financiers.</p>
+
+    <h3>Hébergement</h3>
+    <p>Cette page est hébergée par GitHub Pages. GitHub&nbsp;Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.</p>
+
+    <h3>Propriété intellectuelle</h3>
+    <p>L'ensemble des contenus de cette page est protégé par le droit d'auteur. Toute reproduction, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
+
+    <h2 style="margin-top:38px;">Politique de confidentialité</h2>
+
+    <h3>Qui traite vos données</h3>
+    <p>Investisseurs 3.0, responsable de traitement, joignable à <a href="mailto:contact@academiedesinvestisseurs.com">contact@academiedesinvestisseurs.com</a>.</p>
+
+    <h3>Ce qui est collecté, et pourquoi</h3>
+    <ul>
+      <li><strong>Prénom, e-mail et téléphone</strong>, saisis dans le calendrier de réservation : fixer le rendez-vous, vous envoyer la confirmation et le lien de la visio, vous rappeler avant le rendez-vous. Base légale : votre consentement. Le calendrier est fourni par iClosed, qui traite ces données pour notre compte.</li>
+      <li><strong>Montant disponible, placements et situation</strong>, si vous les renseignez : préparer votre diagnostic. Base légale : votre consentement.</li>
+      <li><strong>Identifiant de votre lien personnel</strong> (paramètre de l'adresse de cette page) : savoir quels inscrits ont consulté cette page et réservé. Base légale : notre intérêt légitime à suivre les suites du live.</li>
+    </ul>
+    <p>Aucun profilage automatisé, aucune décision automatisée. Vous pouvez retirer votre consentement à tout moment, sans avoir à vous justifier, en écrivant à l'adresse de contact.</p>
+
+    <h3>Qui les reçoit</h3>
+    <p>Vos réservations sont enregistrées dans un tableur Google Sheets privé via Google Apps Script (Google Ireland Limited), accessible à l'équipe d'Investisseurs 3.0, et transmises à <strong>Valar Gestion Privée</strong>, qui réalise le diagnostic. Des transferts hors Union européenne sont possibles, encadrés par les clauses contractuelles types de la Commission européenne.</p>
+    <p><strong>Vos données ne sont ni vendues, ni louées, ni transmises à d'autres tiers</strong> à des fins commerciales.</p>
+
+    <h3>Combien de temps</h3>
+    <p>Trois ans après notre dernier échange, puis suppression. Une demande de suppression est traitée sous 30 jours.</p>
+
+    <h3>Vos droits</h3>
+    <p>Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité. Écrivez à <a href="mailto:contact@academiedesinvestisseurs.com">contact@academiedesinvestisseurs.com</a> : vous recevrez une réponse sous un mois. Si elle ne vous convient pas, vous pouvez saisir la CNIL : <a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>, 3 place de Fontenoy, 75007 Paris.</p>
+
+    <p style="margin-top:24px;font-size:0.78rem;">Dernière mise à jour : 13 septembre 2026.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var C = window.CONFIG;
+  var P = new URLSearchParams(location.search);
+  var $ = function (id) { return document.getElementById(id); };
+  var TEST = (P.get('test') || '').toLowerCase();                 // avant | ouvert | ferme | 1
+  var ID = (P.get('i') || '').slice(0, 20);
+  var OUVERTURE_AVANT_FIN_MIN = (C.OUVERTURE_AVANT_FIN_MIN != null) ? +C.OUVERTURE_AVANT_FIN_MIN : 30;  // 21h30 pour un live 20h-22h
+  var ICLOSED = 'https://app.iclosed.io/e/investisseurs-3-0/appel-diagnostic-audit-investisseurs-3-0';
+
+  /* ---------- Dates, heure de Paris ---------- */
+  function fmt(opts) { return new Intl.DateTimeFormat('fr-FR', Object.assign({ timeZone: 'Europe/Paris' }, opts)); }
+  function heure(d) {
+    var p = fmt({ hour: 'numeric', minute: '2-digit', hourCycle: 'h23' }).formatToParts(d);
+    var h = p.find(function (x) { return x.type === 'hour'; }).value;
+    var m = p.find(function (x) { return x.type === 'minute'; }).value;
+    return h + 'h' + (m === '00' ? '' : m);
+  }
+  function cleJour(d) {
+    var o = fmt({ year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(d).reduce(function (a, p) { a[p.type] = p.value; return a; }, {});
+    return o.year + '-' + o.month + '-' + o.day;
+  }
+  function dateLongue(d) { return fmt({ weekday: 'long', day: 'numeric', month: 'long' }).format(d); }
+  function dateNum(d) { return fmt({ day: 'numeric', month: 'long' }).format(d); }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  function deuxChiffres(n) { return (n < 10 ? '0' : '') + n; }
+
+  var SESSIONS = C.SESSIONS.map(function (s) { return new Date(s); }).filter(function (d) { return !isNaN(d); }).map(function (d) {
+    var fin = new Date(d.getTime() + C.DUREE_MIN * 60000);
+    return { debut: d, fin: fin, ouverture: new Date(fin.getTime() - OUVERTURE_AVANT_FIN_MIN * 60000), fermeture: new Date(fin.getTime() + C.FENETRE_H * 3600000), cle: cleJour(d) };
+  });
+
+  /* La session : ?s=AAAA-MM-JJ, sinon la première dont la fermeture n'est pas passée, sinon la dernière. */
+  var cleDemandee = (P.get('s') || '').slice(0, 10);
+  var S = SESSIONS.filter(function (s) { return s.cle === cleDemandee; })[0]
+       || SESSIONS.filter(function (s) { return s.fermeture.getTime() > Date.now(); })[0]
+       || SESSIONS[SESSIONS.length - 1];
+  var PROCHAINE = SESSIONS.filter(function (s) { return s.debut.getTime() > S.debut.getTime(); })[0] || null;
+
+  /* ---------- Heure courante (décalée en mode test, mais qui continue de s'écouler) ---------- */
+  var decalage = 0;
+  if (TEST === 'avant') decalage = (S.debut.getTime() - 3 * 3600000) - Date.now();
+  if (TEST === 'ouvert') decalage = (S.ouverture.getTime() + 20 * 60000) - Date.now();
+  if (TEST === 'ferme') decalage = (S.fermeture.getTime() + 2 * 3600000) - Date.now();
+  function maintenant() { return Date.now() + decalage; }
+  if (TEST) { var r = document.createElement('div'); r.className = 'ruban-test'; r.textContent = 'Aperçu de test : ' + TEST; document.body.appendChild(r); }
+
+  /* ---------- Textes calculés ---------- */
+  var N = C.CRENEAUX_DIAGNOSTIC;
+  var fermetureTexte = dateLongue(S.fermeture) + ' ' + heure(S.fermeture);
+  var prochainTexte = PROCHAINE ? dateLongue(PROCHAINE.debut) + ' à ' + heure(PROCHAINE.debut) : '';
+  function remplir(cle, texte) { document.querySelectorAll('[data-config="' + cle + '"]').forEach(function (el) { el.textContent = texte; }); }
+  remplir('n', N);
+  remplir('date', dateLongue(S.debut));
+  remplir('date-num', dateNum(S.debut));
+  remplir('fermeture', fermetureTexte);
+  remplir('ouverture-h', heure(S.ouverture));
+  remplir('prochain', prochainTexte);
+  if (!PROCHAINE) {
+    $('ferme-prochain').textContent = 'La date du prochain live est annoncée sur la page d\'inscription.';
+    $('btn-prochain').textContent = 'Voir le prochain live';
+  }
+
+  /* ---------- État ---------- */
+  function etat() {
+    var t = maintenant();
+    if (t < S.ouverture.getTime()) return 'avant';
+    if (t < S.fermeture.getTime()) return 'ouvert';
+    return 'ferme';
+  }
+  var ETAT = etat();
+  var OK = P.get('ok') === '1' && ETAT !== 'ferme';
+  document.documentElement.setAttribute('data-etat', ETAT);
+  $('etat-' + ETAT).hidden = false;
+
+  /* ---------- Webhook (jamais en mode test) ---------- */
+  function envoyer(objet) {
+    if (TEST || !C.WEBHOOK_URL) return;
+    var body = JSON.stringify(Object.assign({ session: S.cle, horodateur: new Date().toISOString(), test: false,
+      appareil: matchMedia('(pointer: coarse)').matches ? 'mobile' : 'ordinateur', source: 'diagnostics' }, objet));
+    try { if (!navigator.sendBeacon || !navigator.sendBeacon(C.WEBHOOK_URL, new Blob([body], { type: 'text/plain;charset=utf-8' }))) throw 0; }
+    catch (e) { fetch(C.WEBHOOK_URL, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body }).catch(function () {}); }
+  }
+
+  /* Visite : une fois par onglet et par état (la page se recharge d'elle-même aux changements d'état). */
+  try {
+    var k = 'diag_visite|' + S.cle + '|' + ETAT;
+    if (!sessionStorage.getItem(k)) { sessionStorage.setItem(k, '1'); envoyer({ etape: 'diag_visite', id: ID, etat: ETAT }); }
+  } catch (e) { envoyer({ etape: 'diag_visite', id: ID, etat: ETAT }); }
+
+  /* ---------- Compte à rebours ---------- */
+  function duree(ms) {
+    var s = Math.max(0, Math.floor(ms / 1000));
+    return { j: Math.floor(s / 86400), h: Math.floor(s % 86400 / 3600), m: Math.floor(s % 3600 / 60), s: s % 60 };
+  }
+  function dureeTexte(ms) {
+    var d = duree(ms);
+    if (d.j >= 1) return (d.j * 24 + d.h) + ' h ' + deuxChiffres(d.m) + ' min';
+    if (d.h >= 1) return d.h + ' h ' + deuxChiffres(d.m) + ' min';
+    return d.m + ' min ' + deuxChiffres(d.s) + ' s';
+  }
+  function recharger() { if (!TEST) location.reload(); }
+
+  if (ETAT === 'avant') {
+    $('avant-quand').textContent = cleJour(new Date(maintenant())) === S.cle ? 'ce soir' : dateLongue(S.debut);
+    (function tic() {
+      var reste = S.ouverture.getTime() - maintenant();
+      if (reste <= 0) { recharger(); return; }
+      var d = duree(reste);
+      $('av-j').textContent = deuxChiffres(d.j); $('av-h').textContent = deuxChiffres(d.h);
+      $('av-m').textContent = deuxChiffres(d.m); $('av-s').textContent = deuxChiffres(d.s);
+      setTimeout(tic, 1000);
+    })();
+  }
+
+  if (ETAT === 'ouvert') {
+    (function tic() {
+      var reste = S.fermeture.getTime() - maintenant();
+      if (reste <= 0) { recharger(); return; }
+      $('ouvert-reste').textContent = dureeTexte(reste);
+      setTimeout(tic, reste > 3600000 ? 30000 : 1000);
+    })();
+
+    /* Retour iClosed après réservation : confirmation + note dans le Sheet (dédoublonnée côté webhook). */
+    if (OK) {
+      $('bloc-ok').hidden = false;
+      var email = (P.get('Invitee_email') || P.get('invitee_email') || '').slice(0, 200);
+      var creneau = P.get('event_start_time') || '';
+      var dCreneau = creneau ? new Date(creneau) : null;
+      if (dCreneau && !isNaN(dCreneau)) {
+        $('ok-texte').innerHTML = 'Rendez-vous <b>' + cap(dateLongue(dCreneau)) + ' à ' + heure(dCreneau) + '</b>. Vous recevrez la confirmation par e-mail avec le lien de la visio.';
+      }
+      envoyer({ etape: 'diag_reserve', id: ID, email: email, creneau: creneau, source: 'iclosed' });
+    } else {
+      afficherCalendrier();
+    }
+
+    /* Compteur de créneaux restants : lu dans le Sheet, jamais inventé. Sans réponse : « 40 créneaux ouverts ». */
+    if (TEST) {
+      var forces = P.get('restants');
+      if (forces !== null && /^\d+$/.test(forces)) afficherRestants(+forces);
+    } else {
+      lireCreneaux();
+      setInterval(lireCreneaux, 60000);
+    }
+  }
+
+  function afficherCalendrier() {
+    var ic = $('iclosed');
+    var url = ICLOSED + '?utm_source=live-i3&utm_medium=page-diagnostic&utm_campaign=' + encodeURIComponent(S.cle) + (ID ? '&utm_content=' + encodeURIComponent(ID) : '');
+    if (!ic.src) ic.src = url;
+    $('lien-secours').href = url;
+    $('bloc-calendrier').hidden = false;
+  }
+
+  function afficherRestants(restants) {
+    if (typeof restants !== 'number' || isNaN(restants)) return;
+    restants = Math.max(0, Math.min(N, restants));
+    if (restants === 0) {
+      $('ouvert-titre').innerHTML = 'Les <em>' + N + ' créneaux</em> sont pris';
+      $('bloc-calendrier').hidden = true;
+      $('etat-ouvert').querySelector('.sous').hidden = true;
+      if (!OK) $('bloc-complet').hidden = false;
+      var ic = $('iclosed'); if (ic.src) ic.removeAttribute('src');
+      return;
+    }
+    $('ouvert-titre').innerHTML = 'Il reste <em>' + restants + ' créneau' + (restants > 1 ? 'x' : '') + '</em> sur ' + N;
+  }
+
+  function lireCreneaux() {
+    if (!C.WEBHOOK_URL || !('fetch' in window)) return;
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var t = setTimeout(function () { if (ctrl) ctrl.abort(); }, 5000);
+    fetch(C.WEBHOOK_URL + '?action=creneaux&session=' + encodeURIComponent(S.cle) + '&t=' + Date.now(), { signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (j && j.ok && typeof j.restants === 'number') afficherRestants(j.restants); })
+      .catch(function () {})
+      .then(function () { clearTimeout(t); });
+  }
+
+  /* Redirection après réservation : dans une iframe, iClosed envoie à la page hôte
+     { type: 'openInParentTab', url } au lieu d'ouvrir lui-même sa page de confirmation. */
+  window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://app.iclosed.io') return;
+    var ic = $('iclosed');
+    if (ic && ic.contentWindow && e.source !== ic.contentWindow) return;
+    var d = e.data || {};
+    if (d.type === 'openInParentTab' && typeof d.url === 'string' && d.url.indexOf('https://') === 0) {
+      window.location.href = d.url;
+    }
+  });
+
+  /* Changement d'état pendant que la page est ouverte (onglet resté ouvert depuis le live) : rechargement. */
+  setInterval(function () { if (etat() !== ETAT) recharger(); }, 30000);
+
+  /* ---------- Mentions légales ---------- */
+  var modale = $('modale-legal'), fermer = $('fermer-legal'), declencheur = null;
+  function ouvrir(ev) { ev.preventDefault(); declencheur = ev.currentTarget; modale.hidden = false; document.documentElement.classList.add('modale-ouverte'); fermer.focus(); }
+  function refermer() { modale.hidden = true; document.documentElement.classList.remove('modale-ouverte'); if (declencheur) declencheur.focus(); }
+  document.querySelectorAll('[data-ouvre-legal]').forEach(function (a) { a.addEventListener('click', ouvrir); });
+  fermer.addEventListener('click', refermer);
+  modale.addEventListener('click', function (ev) { if (ev.target === modale) refermer(); });
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !modale.hidden) refermer(); });
+})();
+</script>
+</body>
+</html>
